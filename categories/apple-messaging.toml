@@ -1,0 +1,77 @@
+name = "Apple Messaging"
+description = "Blocks iMessage and FaceTime messaging and calling services"
+severity = "aggressive"
+
+impact = """
+- iMessage will not send or receive messages
+- FaceTime calls will not connect
+- Message attachments will not be delivered
+- Contact Key Verification will not work
+- SMS fallback may still work on iPhone
+"""
+
+[[rules]]
+notes = "Apple Identity Services (IDS) - key exchange and directory"
+domains = [
+    "identity.ess.apple.com",
+    "identity.ess-apple.com.akadns.net",
+    "service.ess.apple.com",
+    "service1.ess.apple.com",
+    "service2.ess.apple.com",
+]
+
+[[rules]]
+notes = "iMessage/FaceTime bag configuration"
+domains = [
+    "bag.apple.com",
+    "init-p01md.apple.com",
+]
+
+[[rules]]
+notes = "Key Transparency - Contact Key Verification"
+domains = [
+    "init-kt.apple.com",
+    "init-kt-prod.apple.com",
+]
+
+[[rules]]
+notes = "iCloud attachment delivery"
+domains = [
+    "icloud-content.com",
+]
+
+[[rules]]
+notes = "Block Messages app from all network access"
+deny-process = "/System/Applications/Messages.app/Contents/MacOS/Messages"
+
+[[rules]]
+notes = "Block iMessage agent from all network access"
+deny-process = "/System/Library/PrivateFrameworks/IMCore.framework/imagent.app/Contents/MacOS/imagent"
+
+[[rules]]
+notes = "Block Identity Services daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/IDS.framework/identityservicesd.app/Contents/MacOS/identityservicesd"
+
+[[rules]]
+notes = "Block Call Services daemon (FaceTime) from all network access"
+deny-process = "/System/Library/PrivateFrameworks/TelephonyUtilities.framework/callservicesd"
+
+[[rules]]
+notes = "Block AV Conferencing daemon (FaceTime) from all network access"
+deny-process = "/usr/libexec/avconferenced"
+
+[[rules]]
+notes = "Block FaceTime Conversation Service from all network access"
+deny-process = "/System/Library/PrivateFrameworks/TelephonyUtilities.framework/XPCServices/com.apple.FaceTime.FTConversationService.xpc/Contents/MacOS/com.apple.FaceTime.FTConversationService"
+
+[[rules]]
+notes = "Block iMessage Persistence Agent from all network access"
+deny-process = "/System/Library/PrivateFrameworks/IMDPersistence.framework/XPCServices/IMDPersistenceAgent.xpc/Contents/MacOS/IMDPersistenceAgent"
+
+[[rules]]
+notes = "Block iMessage History Deletion Agent from all network access"
+deny-process = "/System/Library/PrivateFrameworks/IMDPersistence.framework/IMAutomaticHistoryDeletionAgent.app/Contents/MacOS/IMAutomaticHistoryDeletionAgent"
+
+[[rules]]
+notes = "Block Social Layer daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/SocialLayer.framework/sociallayerd.app/Contents/MacOS/sociallayerd"

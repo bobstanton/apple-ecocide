@@ -1,0 +1,44 @@
+name = "Apple Weather"
+description = "Blocks Apple Weather app and weather data services"
+severity = "aggressive"
+
+impact = """
+- Weather app will not show forecasts
+- Weather widgets will not update
+- Weather data in other apps may be affected
+- Severe weather alerts will not appear
+- Consider using alternative weather apps/services
+"""
+
+[[rules]]
+notes = "Apple Weather data services"
+domains = [
+    "weather-data.apple.com",
+    "weather-data-origin.apple.com",
+    "weather.apple.com",
+    "weather-edge.apple.com",
+]
+
+[[rules]]
+notes = "Apple Weather API"
+domains = [
+    "weather-map.apple.com",
+    "weather-map2.apple.com",
+    "weatherkit.apple.com",
+    "weatherkit-analytics.apple.com",
+]
+
+[[rules]]
+notes = "Dark Sky (Apple's weather backend)"
+domains = [
+    "api.darksky.net",
+    "darksky.net",
+]
+
+[[rules]]
+notes = "Block Weather app from all network access"
+deny-process = "/System/Applications/Weather.app/Contents/MacOS/Weather"
+
+[[rules]]
+notes = "Block Weather daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/WeatherDaemon.framework/weatherd"

@@ -1,0 +1,105 @@
+name = "Google Advertising"
+description = "Blocks Google ads, DoubleClick, AdSense, AdWords, and ad tracking"
+severity = "minimal"
+
+impact = """
+- Google ads will not display on websites
+- YouTube ads may be blocked (but not all)
+- Ad-supported websites may show blank spaces
+- Some websites may complain about ad blockers
+- Google ad attribution tracking blocked
+"""
+
+[[rules]]
+notes = "Google Ad Services"
+domains = [
+    "adservice.google.com",
+    "adservice.google.co.uk",
+    "adservice.google.de",
+    "adservice.google.fr",
+    "adservice.google.ca",
+    "adservice.google.com.au",
+    "adservice.google.co.in",
+    "adservice.google.co.jp",
+    "adservice.google.com.br",
+    "adservice.google.es",
+    "adservice.google.it",
+    "adservice.google.nl",
+    "adservice.google.pl",
+    "adservice.google.ru",
+    "googleadservices.com",
+    "www.googleadservices.com",
+    "partner.googleadservices.com",
+]
+
+[[rules]]
+notes = "Google Syndication"
+domains = [
+    "pagead2.googlesyndication.com",
+    "pagead.googlesyndication.com",
+    "afs.googlesyndication.com",
+    "www.googlesyndication.com",
+    "googlesyndication.com",
+    "tpc.googlesyndication.com",
+    "googlesyndication.l.google.com",
+    "pixel.googlesyndication.com",
+    "video-ad-stats.googlesyndication.com",
+]
+
+[[rules]]
+notes = "DoubleClick ad network"
+domains = [
+    "pagead.l.doubleclick.net",
+    "googleads.g.doubleclick.net",
+    "googleads2.g.doubleclick.net",
+    "googleads3.g.doubleclick.net",
+    "googleads4.g.doubleclick.net",
+    "ad.doubleclick.net",
+    "doubleclick.net",
+    "securepubads.g.doubleclick.net",
+    "pubads.g.doubleclick.net",
+    "adclick.g.doubleclick.net",
+    "cm.g.doubleclick.net",
+    "ad.mo.doubleclick.net",
+    "ad-g.doubleclick.net",
+    "survey.g.doubleclick.net",
+    "surveys.g.doubleclick.net",
+]
+
+[[rules]]
+notes = "Google 2mdn ad serving"
+domains = [
+    "s0.2mdn.net",
+    "s1.2mdn.net",
+    "2mdn.net",
+]
+
+[[rules]]
+notes = "AdWords and AdSense"
+domains = [
+    "adwords.google.com",
+    "adwords.l.google.com",
+    "adsense.google.com",
+    "partnerad.l.google.com",
+]
+
+[[rules]]
+notes = "Google PageAd"
+domains = [
+    "pagead.l.google.com",
+    "pagead-googlehosted.l.google.com",
+]
+
+[[rules]]
+notes = "YouTube ads"
+domains = [
+    "ad.youtube.com",
+    "ads.youtube.com",
+    "redirector.googlevideo.com",
+]
+
+[[rules]]
+notes = "Google IMA SDK (video ads)"
+domains = [
+    "imasdk.googleapis.com",
+]

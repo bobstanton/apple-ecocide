@@ -1,0 +1,148 @@
+name = "Apple Software Updates"
+description = "Blocks macOS, iOS, and app software update servers"
+severity = "aggressive"
+
+impact = """
+- macOS system updates will not download
+- iOS/iPadOS updates will not download
+- Security patches will not be applied automatically
+- App updates from App Store may be affected
+- You will need to manually download updates if needed
+- NOT RECOMMENDED unless you have specific update control requirements
+"""
+
+[[rules]]
+notes = "Apple Software Update scanning and catalog"
+domains = [
+    "swscan.apple.com",
+    "swscan.apple.com.akadns.net",
+    "swquery.apple.com",
+    "swdownload.apple.com",
+    "swpost.apple.com",
+]
+
+[[rules]]
+notes = "Apple Software Update CDN"
+domains = [
+    "swcdn.apple.com",
+    "swcdn.apple.com.akadns.net",
+    "swcdn.g.aaplimg.com",
+]
+
+[[rules]]
+notes = "Apple Software Update distribution"
+domains = [
+    "swdist.apple.com",
+    "swdist.apple.com.akadns.net",
+]
+
+[[rules]]
+notes = "Apple mobile/macOS software update"
+domains = [
+    "mesu.apple.com",
+    "mesu.apple.com.akadns.net",
+    "mesu.g.aaplimg.com",
+    "mesu-cdn.apple.com.akadns.net",
+    "mesu-cdn.origin-apple.com.akadns.net",
+]
+
+[[rules]]
+notes = "Apple OS updates CDN"
+domains = [
+    "updates.cdn-apple.com",
+    "updates-http.cdn-apple.com",
+    "updates.apple.com",
+    "tahoe.cdn-apple.com",
+    "sequoia.cdn-apple.com",
+    "sonoma.cdn-apple.com",
+    "ventura.cdn-apple.com",
+    "monterey.cdn-apple.com",
+]
+
+[[rules]]
+notes = "Apple downloads"
+domains = [
+    "appldnld.apple.com",
+    "appldnld.apple.com.edgesuite.net",
+]
+
+[[rules]]
+notes = "Apple OS recovery and CDN"
+domains = [
+    "oscdn.apple.com",
+    "osrecovery.apple.com",
+]
+
+[[rules]]
+notes = "Apple software update configuration"
+domains = [
+    "suconfig.apple.com",
+    "suconfig.apple.com.akadns.net",
+]
+
+[[rules]]
+notes = "Apple asset and catalog servers (GDMF)"
+domains = [
+    "gdmf.apple.com",
+    "gdmf.apple.com.akadns.net",
+    "gdmf-ados.apple.com",
+    "gg.apple.com",
+    "gnf-mdn.apple.com",
+    "gnf-mr.apple.com",
+    "ig.apple.com",
+    "gs.apple.com",
+    "gsra.apple.com",
+]
+
+[[rules]]
+notes = "Apple macOS update components"
+domains = [
+    "skl.apple.com",
+]
+
+[[rules]]
+notes = "Apple device-attached installation and verification"
+domains = [
+    "wkms-public.apple.com",
+    "fcs-keys-pub-prod.cdn-apple.com",
+]
+
+[[rules]]
+notes = "Apple Xcode and developer updates"
+domains = [
+    "devimages-cdn.apple.com",
+    "developer.apple.com",
+    "download.developer.apple.com",
+]
+
+[[rules]]
+notes = "Block Software Update daemon from all network access"
+deny-process = "/System/Library/CoreServices/Software Update.app/Contents/Resources/softwareupdated"
+
+[[rules]]
+notes = "Block Mobile Asset daemon from all network access"
+deny-process = "/usr/libexec/mobileassetd"
+
+[[rules]]
+notes = "Block Content Cache locator service from all network access"
+deny-process = "/System/Library/PrivateFrameworks/AssetCacheServices.framework/Versions/A/XPCServices/AssetCacheLocatorService.xpc/Contents/MacOS/AssetCacheLocatorService"
+
+[[rules]]
+notes = "Block Idle Assets daemon (background asset downloads) from all network access"
+deny-process = "/System/Library/PrivateFrameworks/TVIdleServices.framework/idleassetsd"
+
+[[rules]]
+notes = "Block Software Update helper daemon from all network access"
+deny-process = "/System/Library/CoreServices/Software Update.app/Contents/Resources/suhelperd"
+
+[[rules]]
+notes = "Block Beta Enrollment daemon from all network access"
+deny-process = "/usr/libexec/betaenrollmentd"
+
+[[rules]]
+notes = "Block Beta Enrollment agent from all network access"
+deny-process = "/usr/libexec/betaenrollmentagent"
+
+[[rules]]
+notes = "Block Install Coordination daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/InstallCoordination.framework/Support/installcoordinationd"

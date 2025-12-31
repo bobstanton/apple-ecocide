@@ -1,0 +1,40 @@
+name = "Apple Content Downloads"
+description = "Blocks Apple content downloads including GarageBand sounds, Swift Playgrounds, and fonts"
+severity = "aggressive"
+
+impact = """
+- GarageBand loops and sound packs cannot be downloaded
+- Swift Playgrounds content and lessons unavailable
+- Some system sounds may not download
+- Help Viewer will not load online help content
+- Apple fonts will not download
+"""
+
+[[rules]]
+notes = "GarageBand and audio content"
+domains = [
+    "audiocontentdownload.apple.com",
+]
+
+[[rules]]
+notes = "Swift Playgrounds content"
+domains = [
+    "playgrounds-assets-cdn.apple.com",
+    "playgrounds-cdn.apple.com",
+]
+
+[[rules]]
+notes = "Apple fonts and typography"
+domains = [
+    "fonts.apple.com",
+]
+
+[[rules]]
+notes = "Help Viewer content (helpd)"
+domains = [
+    "cds.apple.com",
+]
+
+[[rules]]
+notes = "Block Help Viewer daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/HelpData.framework/Versions/A/Resources/helpd"

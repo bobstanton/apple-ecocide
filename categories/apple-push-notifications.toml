@@ -1,0 +1,120 @@
+name = "Apple Push Notifications"
+description = "Blocks Apple Push Notification Service (APNs) used for iMessage, FaceTime, and app notifications"
+severity = "aggressive"
+
+impact = """
+- iMessage will not receive messages in real-time
+- FaceTime calls will not ring/connect
+- App push notifications will not be delivered
+- 2FA codes sent to other Apple devices will not arrive
+- Find My alerts will not work
+- Most real-time Apple services will be affected
+"""
+
+[[rules]]
+notes = "Apple Push Notification courier servers (0-50)"
+domains = [
+    "0-courier.push.apple.com",
+    "1-courier.push.apple.com",
+    "2-courier.push.apple.com",
+    "3-courier.push.apple.com",
+    "4-courier.push.apple.com",
+    "5-courier.push.apple.com",
+    "6-courier.push.apple.com",
+    "7-courier.push.apple.com",
+    "8-courier.push.apple.com",
+    "9-courier.push.apple.com",
+    "10-courier.push.apple.com",
+    "11-courier.push.apple.com",
+    "12-courier.push.apple.com",
+    "13-courier.push.apple.com",
+    "14-courier.push.apple.com",
+    "15-courier.push.apple.com",
+    "16-courier.push.apple.com",
+    "17-courier.push.apple.com",
+    "18-courier.push.apple.com",
+    "19-courier.push.apple.com",
+    "20-courier.push.apple.com",
+    "21-courier.push.apple.com",
+    "22-courier.push.apple.com",
+    "23-courier.push.apple.com",
+    "24-courier.push.apple.com",
+    "25-courier.push.apple.com",
+    "26-courier.push.apple.com",
+    "27-courier.push.apple.com",
+    "28-courier.push.apple.com",
+    "29-courier.push.apple.com",
+    "30-courier.push.apple.com",
+    "31-courier.push.apple.com",
+    "32-courier.push.apple.com",
+    "33-courier.push.apple.com",
+    "34-courier.push.apple.com",
+    "35-courier.push.apple.com",
+    "36-courier.push.apple.com",
+    "37-courier.push.apple.com",
+    "38-courier.push.apple.com",
+    "39-courier.push.apple.com",
+    "40-courier.push.apple.com",
+    "41-courier.push.apple.com",
+    "42-courier.push.apple.com",
+    "43-courier.push.apple.com",
+    "44-courier.push.apple.com",
+    "45-courier.push.apple.com",
+    "46-courier.push.apple.com",
+    "47-courier.push.apple.com",
+    "48-courier.push.apple.com",
+    "49-courier.push.apple.com",
+    "50-courier.push.apple.com",
+]
+
+[[rules]]
+notes = "Apple Push Notification Akamai CDN aliases"
+domains = [
+    "courier-push-apple.com.akadns.net",
+]
+
+[[rules]]
+notes = "Apple Push Notification sandbox servers"
+domains = [
+    "0-courier.sandbox.push.apple.com",
+    "1-courier.sandbox.push.apple.com",
+    "2-courier.sandbox.push.apple.com",
+    "3-courier.sandbox.push.apple.com",
+    "4-courier.sandbox.push.apple.com",
+    "5-courier.sandbox.push.apple.com",
+    "6-courier.sandbox.push.apple.com",
+    "7-courier.sandbox.push.apple.com",
+    "8-courier.sandbox.push.apple.com",
+    "9-courier.sandbox.push.apple.com",
+    "10-courier.sandbox.push.apple.com",
+    "courier-sandbox-push-apple.com.akadns.net",
+]
+
+[[rules]]
+notes = "Apple Push Notification initialization"
+domains = [
+    "init.push.apple.com",
+    "init-p01st.push.apple.com",
+    "init-s01st.push.apple.com",
+]
+
+[[rules]]
+notes = "Regional Apple Push Notification servers"
+domains = [
+    "us-courier.push-apple.com.akadns.net",
+    "sjc-courier.push-apple.com.akadns.net",
+    "pop-eur-benelux-courier.push-apple.com.akadns.net",
+    "pop-eur-central-courier.push-apple.com.akadns.net",
+    "pop-namer-central-courier.push-apple.com.akadns.net",
+    "pop-namer-ne-courier.push-apple.com.akadns.net",
+    "pop-namer-nw-courier.push-apple.com.akadns.net",
+    "pop-namer-se-courier.push-apple.com.akadns.net",
+]
+
+[[rules]]
+notes = "Block Apple Push Services daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/ApplePushService.framework/apsd"
+
+[[rules]]
+notes = "Block Notification Center agent from all network access"
+deny-process = "/System/Library/PrivateFrameworks/Noticeboard.framework/Versions/A/Resources/nbagent.app/Contents/MacOS/nbagent"

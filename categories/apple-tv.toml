@@ -1,0 +1,52 @@
+name = "Apple TV+"
+description = "Blocks Apple TV+ streaming service"
+severity = "aggressive"
+
+impact = """
+- Apple TV+ shows and movies will not stream
+- Cannot browse Apple TV+ catalog
+- Apple TV app content may not load
+- Purchased/rented movies may not play
+- Local content should still work
+"""
+
+[[rules]]
+notes = "Apple TV+ streaming"
+domains = [
+    "tv.apple.com",
+    "api.tv.apple.com",
+    "uts-api.itunes.apple.com",
+]
+
+[[rules]]
+notes = "Apple TV video playback"
+domains = [
+    "video.apple.com",
+    "hls.itunes.apple.com",
+    "hls-amt.itunes.apple.com",
+    "mvod.itunes.apple.com",
+]
+
+[[rules]]
+notes = "Apple TV content delivery"
+domains = [
+    "play-edge.itunes.apple.com",
+    "play.itunes.apple.com",
+    "np-edge.itunes.apple.com",
+]
+
+[[rules]]
+notes = "Apple TV channels and partners"
+domains = [
+    "uts.itunes.apple.com",
+    "bag.itunes.apple.com",
+    "umc-world-client-ssl.apple.com",
+]
+
+[[rules]]
+notes = "Block TV app from all network access"
+deny-process = "/System/Applications/TV.app/Contents/MacOS/TV"
+
+[[rules]]
+notes = "Block TV idle assets daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/TVIdleServices.framework/idleassetsd"

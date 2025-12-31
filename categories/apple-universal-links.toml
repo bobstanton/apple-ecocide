@@ -1,0 +1,19 @@
+name = "Apple Universal Links"
+description = "Blocks Apple Associated Domains for Universal Links and app-website associations"
+severity = "aggressive"
+
+impact = """
+- Universal Links may not work (tapping links won't open apps)
+- Handoff between websites and apps may fail
+- App Clips may not launch from links
+- Shared Web Credentials may not work
+- Password AutoFill associations may be affected
+"""
+
+[[rules]]
+notes = "Associated Domains for Universal Links"
+domains = [
+    "app-site-association.cdn-apple.com",
+    "app-site-association.apple.com",
+    "app-site-association.networking.apple",
+]

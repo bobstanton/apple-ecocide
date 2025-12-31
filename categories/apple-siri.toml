@@ -1,0 +1,130 @@
+name = "Apple Siri"
+description = "Blocks Siri voice assistant, dictation, and voice trigger services"
+severity = "recommended"
+
+impact = """
+- Siri voice commands will not work
+- Dictation/voice typing will be disabled
+- "Hey Siri" wake word detection blocked
+- Siri Suggestions will not function
+- Voice-based search will not work
+"""
+
+[[rules]]
+notes = "Siri main backend servers (Guzzoni)"
+domains = [
+    "guzzoni.apple.com",
+    "origin.guzzoni-apple.com.akadns.net",
+    "guzzoni-apple-com.v.aaplimg.com",
+    "fr51p02sa.guzzoni-apple.com.akadns.net",
+    "mu21p02sa.guzzoni-apple.com.akadns.net",
+    "sp11p03sa.guzzoni-apple.com.akadns.net",
+]
+
+[[rules]]
+notes = "Siri seed/training data collection"
+domains = [
+    "seed.siri.apple.com",
+    "origin.seed-siri-apple.com.akadns.net",
+]
+
+[[rules]]
+notes = "Siri assistant services"
+domains = [
+    "siri.apple.com",
+    "siri-api.apple.com",
+    "siri-search.itunes.apple.com",
+    "uts-api-siri.itunes.apple.com",
+    "dejavu.apple.com",
+    "dejavu.apple.com.edgekey.net",
+    "assistant.apple.com",
+    "assistantd.apple.com",
+    "lookup.apple.com",
+    "lookup-api.apple.com",
+]
+
+[[rules]]
+notes = "Dictation and voice trigger services"
+domains = [
+    "dictation.apple.com",
+    "dictation.ls.apple.com",
+    "voicetrigger.apple.com",
+    "voicetrigger2.apple.com",
+    "instrumentation.apple.com",
+]
+
+[[rules]]
+notes = "Siri relay and backend servers"
+domains = [
+    "prod.siri.apple.com",
+]
+
+[[rules]]
+notes = "Block Siri app from all network access"
+deny-process = "/System/Applications/Siri.app/Contents/MacOS/Siri"
+
+[[rules]]
+notes = "Block Siri assistant daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/AssistantServices.framework/Versions/A/Support/assistantd"
+
+[[rules]]
+notes = "Block Siri knowledge daemon from all network access"
+deny-process = "/usr/libexec/siriknowledged"
+
+[[rules]]
+notes = "Block parsecd (Siri suggestions) from all network access"
+deny-process = "/System/Library/PrivateFrameworks/CoreParsec.framework/parsecd"
+
+[[rules]]
+notes = "Block knowledge agent from all network access"
+deny-process = "/usr/libexec/knowledge-agent"
+
+[[rules]]
+notes = "Parsec feedback/analytics (Siri Suggestions telemetry)"
+domains = [
+    "swallow.apple.com",
+]
+
+[[rules]]
+notes = "Block Parsec feedback daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/CoreParsec.framework/parsec-fbf"
+
+[[rules]]
+notes = "Block Suggestions daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/CoreSuggestions.framework/Versions/A/Support/suggestd"
+
+[[rules]]
+notes = "Block Siri inference daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/SiriInference.framework/Versions/A/siriinferenced"
+
+[[rules]]
+notes = "Block Siri actions daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/VoiceShortcuts.framework/Versions/A/Support/siriactionsd"
+
+[[rules]]
+notes = "Block Siri dialog manager from all network access"
+deny-process = "/System/Library/PrivateFrameworks/ContinuousDialogManagerService.framework/assistant_cdmd"
+
+[[rules]]
+notes = "Block Core Speech daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/CoreSpeech.framework/corespeechd"
+
+[[rules]]
+notes = "Block System Core Speech daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/CoreSpeech.framework/corespeechd_system"
+
+[[rules]]
+notes = "Block Contacts Donation Agent from all network access"
+deny-process = "/System/Library/PrivateFrameworks/ContactsDonation.framework/Versions/A/Support/contactsdonationagent"
+
+[[rules]]
+notes = "Block Natural Language daemon from all network access"
+deny-process = "/usr/libexec/naturallanguaged"
+
+[[rules]]
+notes = "Block Spotlight app from all network access"
+deny-process = "/System/Library/CoreServices/Spotlight.app/Contents/MacOS/Spotlight"
+
+[[rules]]
+notes = "Block Spotlight Knowledge daemon from all network access"
+deny-process = "/System/Library/Frameworks/CoreSpotlight.framework/spotlightknowledged"

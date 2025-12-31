@@ -1,0 +1,58 @@
+name = "Safari Telemetry"
+description = "Blocks Safari-specific telemetry, configuration, and safe browsing"
+severity = "minimal"
+
+impact = """
+- Safari configuration sync disabled
+- Safari Safe Browsing protection disabled (phishing/malware warnings)
+- Behavioral analytics for Safari blocked
+- Typekit fonts may not load on some websites
+- Safari Web Push notifications will not work
+"""
+
+[[rules]]
+notes = "Safari configuration"
+domains = [
+    "configuration.ls.apple.com",
+]
+
+[[rules]]
+notes = "Safari Safe Browsing"
+domains = [
+    "safebrowsing.apple.com",
+    "token.safebrowsing.apple",
+]
+
+[[rules]]
+notes = "Adobe Typekit fonts (used by Safari)"
+domains = [
+    "p.typekit.net",
+    "use.typekit.net",
+]
+
+[[rules]]
+notes = "Safari Web Push Service"
+domains = [
+    "wps.apple.com",
+]
+
+[[rules]]
+notes = "Safari Password Breach checking service"
+domains = [
+    "pba.apple.com",
+    "pba0.apple.com",
+    "pba1.apple.com",
+    "pba2.apple.com",
+]
+
+[[rules]]
+notes = "Block Password Breach Agent (compromised password checking) from all network access"
+deny-process = "/System/Cryptexes/App/usr/libexec/PasswordBreachAgent"
+
+[[rules]]
+notes = "Block Safari Bookmarks Sync Agent from all network access"
+deny-process = "/System/Cryptexes/App/System/Library/CoreServices/SafariSupport.bundle/Contents/MacOS/SafariBookmarksSyncAgent"
+
+[[rules]]
+notes = "Block Web Privacy daemon (Safari web push/privacy) from all network access"
+deny-process = "/System/Library/PrivateFrameworks/WebPrivacy.framework/Versions/A/webprivacyd"

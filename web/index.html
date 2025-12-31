@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple Ecocide - Little Snitch Rules Generator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <style>
+        :root {
+            --pico-font-size: 16px;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 0 1rem;
+        }
+
+        header p {
+            margin-bottom: 0.25rem;
+        }
+
+        .version {
+            font-size: 0.875rem;
+            color: var(--pico-muted-color);
+        }
+
+        .grid-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .categories-list {
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid var(--pico-muted-border-color);
+            border-radius: var(--pico-border-radius);
+        }
+
+        .category-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--pico-muted-border-color);
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .category-item:last-child {
+            border-bottom: none;
+        }
+
+        .category-item:hover {
+            background-color: var(--pico-card-background-color);
+        }
+
+        .category-item.selected {
+            background-color: color-mix(in srgb, var(--pico-primary) 15%, white);
+        }
+
+        .category-item input[type="checkbox"] {
+            margin: 0;
+        }
+
+        .category-item .info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .category-item .name {
+            font-weight: 500;
+            display: block;
+        }
+
+        .category-item .description {
+            font-size: 0.875rem;
+            color: var(--pico-muted-color);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .category-item .severity {
+            font-size: 0.75rem;
+            padding: 0.125rem 0.5rem;
+            border-radius: 1rem;
+            white-space: nowrap;
+        }
+
+        .severity-minimal { background: #d1fae5; color: #065f46; }
+        .severity-recommended { background: #fef3c7; color: #92400e; }
+        .severity-aggressive { background: #fee2e2; color: #991b1b; }
+
+        .quick-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .quick-actions button {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+
+        .stats {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 0.75rem 1.5rem;
+            background: var(--pico-card-background-color);
+            border-radius: var(--pico-border-radius);
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--pico-primary);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--pico-muted-color);
+        }
+
+        .output-area {
+            background: var(--pico-card-background-color);
+            border: 1px solid var(--pico-muted-border-color);
+            border-radius: var(--pico-border-radius);
+            padding: 1rem;
+            font-family: var(--pico-font-family-monospace);
+            font-size: 0.75rem;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .url-display {
+            background: var(--pico-card-background-color);
+            padding: 0.75rem;
+            border-radius: var(--pico-border-radius);
+            font-family: var(--pico-font-family-monospace);
+            font-size: 0.75rem;
+            word-break: break-all;
+            margin-top: 1rem;
+        }
+
+        .actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        /* Category detail modal/panel */
+        .detail-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            max-width: 500px;
+            height: 100vh;
+            background: var(--pico-background-color);
+            border-left: 1px solid var(--pico-muted-border-color);
+            box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .detail-panel.open {
+            transform: translateX(0);
+        }
+
+        .detail-panel-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 999;
+        }
+
+        .detail-panel-backdrop.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .detail-header h3 {
+            margin: 0;
+        }
+
+        .detail-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: auto;
+            color: var(--pico-muted-color);
+        }
+
+        .detail-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-section h4 {
+            font-size: 0.875rem;
+            color: var(--pico-muted-color);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .domain-list, .process-list {
+            background: var(--pico-card-background-color);
+            border-radius: var(--pico-border-radius);
+            padding: 0.75rem;
+            font-family: var(--pico-font-family-monospace);
+            font-size: 0.8rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .domain-list div, .process-list div {
+            padding: 0.25rem 0;
+            border-bottom: 1px solid var(--pico-muted-border-color);
+        }
+
+        .domain-list div:last-child, .process-list div:last-child {
+            border-bottom: none;
+        }
+
+        .impact-text {
+            background: #fef3c7;
+            border-radius: var(--pico-border-radius);
+            padding: 0.75rem;
+            font-size: 0.875rem;
+            color: #92400e;
+            white-space: pre-line;
+        }
+
+        .view-details-btn {
+            background: none;
+            border: none;
+            color: var(--pico-primary);
+            cursor: pointer;
+            font-size: 0.875rem;
+            padding: 0.25rem 0.5rem;
+            text-decoration: underline;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <header>
+            <h1>Apple Ecocide</h1>
+        </header>
+
+        <div id="content">
+            <div class="loading" aria-busy="true">Loading...</div>
+        </div>
+    </main>
+
+    <!-- Detail panel -->
+    <div class="detail-panel-backdrop" id="detail-backdrop" onclick="closeDetailPanel()"></div>
+    <aside class="detail-panel" id="detail-panel">
+        <div class="detail-header">
+            <div>
+                <h3 id="detail-name">Category Name</h3>
+                <span class="severity" id="detail-severity">recommended</span>
+            </div>
+            <button class="detail-close" onclick="closeDetailPanel()">&times;</button>
+        </div>
+        <p id="detail-description"></p>
+
+        <div class="detail-section">
+            <h4>Impact</h4>
+            <div class="impact-text" id="detail-impact"></div>
+        </div>
+
+        <div class="detail-section" id="domains-section">
+            <h4>Blocked Domains (<span id="domains-count">0</span>)</h4>
+            <div class="domain-list" id="detail-domains"></div>
+        </div>
+
+        <div class="detail-section" id="processes-section">
+            <h4>Blocked Processes (<span id="processes-count">0</span>)</h4>
+            <div class="process-list" id="detail-processes"></div>
+        </div>
+    </aside>
+
+    <script type="module">
+        import init, { generate_rules, list_categories, get_category_details } from './pkg/apple_ecocide.js';
+
+        let categories = [];
+        let selectedCategories = new Set();
+        let categoryDetailsCache = {};
+
+        async function main() {
+            try {
+                await init();
+
+
+                // Parse categories
+                categories = JSON.parse(list_categories());
+
+                // Restore state from URL if present
+                restoreStateFromUrl();
+
+                renderUI();
+            } catch (e) {
+                document.getElementById('content').innerHTML = `<article><p>Failed to load: ${e.message}</p></article>`;
+            }
+        }
+
+        let initialMode = 'block';
+        let initialName = 'apple-ecocide';
+
+        function restoreStateFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+
+            // Restore mode
+            if (params.get('mode') === 'allow') {
+                initialMode = 'allow';
+            }
+
+            // Restore name
+            if (params.get('name')) {
+                initialName = params.get('name');
+            }
+
+            // Restore selected categories
+            const include = params.get('include');
+            if (include) {
+                include.split(',').forEach(slug => {
+                    if (categories.some(c => c.slug === slug.trim())) {
+                        selectedCategories.add(slug.trim());
+                    }
+                });
+            }
+        }
+
+        function renderUI() {
+            document.getElementById('content').innerHTML = `
+                <div class="grid-layout">
+                    <section>
+                        <article>
+                            <header>
+                                <h2>Configuration</h2>
+                            </header>
+
+                            <label for="mode">Mode</label>
+                            <select id="mode">
+                                <option value="block" ${initialMode === 'block' ? 'selected' : ''}>Block - Block selected categories</option>
+                                <option value="allow" ${initialMode === 'allow' ? 'selected' : ''}>Allow - Allow only selected, block everything else</option>
+                            </select>
+
+                            <label for="name">Ruleset Name</label>
+                            <input type="text" id="name" value="${initialName !== 'apple-ecocide' ? escapeHtml(initialName) : ''}" placeholder="apple-ecocide">
+
+                            <label>Categories</label>
+                            <div class="quick-actions">
+                                <button class="secondary outline" onclick="selectAll()">Select All</button>
+                                <button class="secondary outline" onclick="selectNone()">Select None</button>
+                                <button class="secondary outline" onclick="selectPattern('*-telemetry')">All Telemetry</button>
+                                <button class="secondary outline" onclick="selectPattern('apple-*')">All Apple</button>
+                            </div>
+                            <div class="categories-list" id="categories-list"></div>
+
+                            <div class="actions">
+                                <button onclick="generateRules()">Generate Rules</button>
+                                <button class="secondary" onclick="downloadRules()">Download</button>
+                            </div>
+
+                            <div class="url-display">
+                                <small><strong>Bookmark:</strong></small><br>
+                                <span id="shareable-url">-</span>
+                            </div>
+                        </article>
+                    </section>
+
+                    <section>
+                        <article>
+                            <header>
+                                <h2>Output</h2>
+                            </header>
+                            <div class="stats">
+                                <div class="stat">
+                                    <div class="stat-value" id="stat-categories">0</div>
+                                    <div class="stat-label">Categories</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value" id="stat-rules">0</div>
+                                    <div class="stat-label">Rules</div>
+                                </div>
+                            </div>
+                            <textarea class="output-area" id="output" readonly rows="15">Select categories and click "Generate Rules"</textarea>
+                        </article>
+                    </section>
+                </div>
+            `;
+
+            renderCategories();
+            updateShareableUrl();
+        }
+
+        function renderCategories() {
+            const list = document.getElementById('categories-list');
+
+            list.innerHTML = categories.map(c => `
+                <div class="category-item ${selectedCategories.has(c.slug) ? 'selected' : ''}" data-slug="${c.slug}">
+                    <input type="checkbox"
+                        id="cat-${c.slug}"
+                        ${selectedCategories.has(c.slug) ? 'checked' : ''}
+                        onchange="toggleCategory('${c.slug}', this.checked); event.stopPropagation();">
+                    <div class="info" onclick="toggleCategoryBySlug('${c.slug}')">
+                        <span class="name">${c.name}</span>
+                        <span class="description">${escapeHtml(c.description)}</span>
+                    </div>
+                    <span class="severity severity-${c.severity}">${c.severity}</span>
+                    <button class="view-details-btn" onclick="showCategoryDetails('${c.slug}'); event.stopPropagation();">Details</button>
+                </div>
+            `).join('');
+        }
+
+        window.toggleCategory = function(slug, checked) {
+            if (checked) {
+                selectedCategories.add(slug);
+            } else {
+                selectedCategories.delete(slug);
+            }
+            renderCategories();
+            updateShareableUrl();
+        };
+
+        window.toggleCategoryBySlug = function(slug) {
+            toggleCategory(slug, !selectedCategories.has(slug));
+        };
+
+        window.selectAll = function() {
+            selectedCategories.clear();
+            categories.forEach(c => selectedCategories.add(c.slug));
+            renderCategories();
+            updateShareableUrl();
+        };
+
+        window.selectNone = function() {
+            selectedCategories.clear();
+            renderCategories();
+            updateShareableUrl();
+        };
+
+        window.selectPattern = function(pattern) {
+            const regex = new RegExp('^' + pattern.replace(/\*/g, '.*').replace(/\?/g, '.') + '$');
+            categories
+                .filter(c => regex.test(c.slug))
+                .forEach(c => selectedCategories.add(c.slug));
+            renderCategories();
+            updateShareableUrl();
+        };
+
+        window.showCategoryDetails = async function(slug) {
+            try {
+                let details;
+                if (categoryDetailsCache[slug]) {
+                    details = categoryDetailsCache[slug];
+                } else {
+                    details = JSON.parse(get_category_details(slug));
+                    categoryDetailsCache[slug] = details;
+                }
+
+                document.getElementById('detail-name').textContent = details.name;
+                document.getElementById('detail-severity').textContent = details.severity;
+                document.getElementById('detail-severity').className = `severity severity-${details.severity}`;
+                document.getElementById('detail-description').textContent = details.description;
+                document.getElementById('detail-impact').textContent = details.impact;
+
+                const domainsSection = document.getElementById('domains-section');
+                const processesSection = document.getElementById('processes-section');
+
+                if (details.domains.length > 0) {
+                    domainsSection.style.display = 'block';
+                    document.getElementById('domains-count').textContent = details.domains.length;
+                    document.getElementById('detail-domains').innerHTML = details.domains.map(d => `<div>${escapeHtml(d)}</div>`).join('');
+                } else {
+                    domainsSection.style.display = 'none';
+                }
+
+                if (details.processes.length > 0) {
+                    processesSection.style.display = 'block';
+                    document.getElementById('processes-count').textContent = details.processes.length;
+                    document.getElementById('detail-processes').innerHTML = details.processes.map(p => `<div>${escapeHtml(p)}</div>`).join('');
+                } else {
+                    processesSection.style.display = 'none';
+                }
+
+                document.getElementById('detail-panel').classList.add('open');
+                document.getElementById('detail-backdrop').classList.add('open');
+            } catch (e) {
+                console.error('Failed to load category details:', e);
+            }
+        };
+
+        window.closeDetailPanel = function() {
+            document.getElementById('detail-panel').classList.remove('open');
+            document.getElementById('detail-backdrop').classList.remove('open');
+        };
+
+        function getIncludeString() {
+            return Array.from(selectedCategories).sort().join(',');
+        }
+
+        function updateShareableUrl() {
+            const mode = document.getElementById('mode')?.value || 'block';
+            const name = document.getElementById('name')?.value || '';
+            const include = getIncludeString();
+
+            const params = new URLSearchParams();
+            if (mode !== 'block') params.set('mode', mode);
+            if (include) params.set('include', include);
+            if (name && name !== 'apple-ecocide') params.set('name', name);
+
+            const queryString = params.toString();
+            const url = `${window.location.origin}${window.location.pathname}${queryString ? '?' + queryString : ''}`;
+
+            // Update browser URL bar without reloading
+            const newUrl = `${window.location.pathname}${queryString ? '?' + queryString : ''}`;
+            history.replaceState(null, '', newUrl);
+
+            const urlEl = document.getElementById('shareable-url');
+            if (urlEl) {
+                urlEl.textContent = queryString ? url : '(select categories to generate URL)';
+            }
+        }
+
+        let lastGeneratedJson = '';
+
+        window.generateRules = function() {
+            const mode = document.getElementById('mode').value;
+            const name = document.getElementById('name').value || 'apple-ecocide';
+            const include = getIncludeString();
+
+            if (!include) {
+                document.getElementById('output').value = 'Please select at least one category.';
+                return;
+            }
+
+            try {
+                const json = generate_rules(mode, 'aggressive', include, '', name);
+                lastGeneratedJson = json;
+
+                const parsed = JSON.parse(json);
+                document.getElementById('stat-categories').textContent = selectedCategories.size;
+                document.getElementById('stat-rules').textContent = parsed.rules.length;
+                document.getElementById('output').value = json;
+
+                // Scroll to output and focus it
+                const output = document.getElementById('output');
+                output.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                output.focus();
+            } catch (e) {
+                document.getElementById('output').value = `Error: ${e.message}`;
+            }
+        };
+
+        window.downloadRules = function() {
+            if (!lastGeneratedJson) {
+                generateRules();
+            }
+            if (!lastGeneratedJson) return;
+
+            const name = document.getElementById('name').value.trim() || 'apple-ecocide';
+            const blob = new Blob([lastGeneratedJson], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${name}.lsrules`;
+            a.click();
+            URL.revokeObjectURL(url);
+        };
+
+        // Update URL when config changes
+        document.addEventListener('change', (e) => {
+            if (e.target.id === 'mode' || e.target.id === 'name') {
+                updateShareableUrl();
+            }
+        });
+
+        document.addEventListener('input', (e) => {
+            if (e.target.id === 'name') {
+                updateShareableUrl();
+            }
+        });
+
+        // Close panel on escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeDetailPanel();
+            }
+        });
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/&/g, '&amp;')
+                      .replace(/</g, '&lt;')
+                      .replace(/>/g, '&gt;')
+                      .replace(/"/g, '&quot;');
+        }
+
+        main();
+    </script>
+</body>
+</html>

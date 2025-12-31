@@ -1,0 +1,143 @@
+name = "Mozilla Firefox Telemetry"
+description = "Blocks Mozilla/Firefox telemetry, crash reporting, experiments, and analytics"
+severity = "minimal"
+
+impact = """
+- Firefox telemetry not sent to Mozilla
+- Crash reports not submitted
+- Normandy experiments/studies disabled
+- Firefox Suggest recommendations blocked
+- Pocket sponsored content blocked
+- Add-on recommendations disabled
+"""
+
+[[rules]]
+notes = "Mozilla core telemetry"
+domains = [
+    "incoming.telemetry.mozilla.org",
+    "telemetry.mozilla.org",
+    "telemetry-coverage.mozilla.org",
+    "telemetry-incoming.r53-2.services.mozilla.com",
+    "prod.ohttp-gateway.prod.webservices.mozgcp.net",
+]
+
+[[rules]]
+notes = "Mozilla crash reporting"
+domains = [
+    "crash-reports.mozilla.com",
+    "crash-stats.mozilla.org",
+    "crash-stats.mozilla.com",
+    "socorro.services.mozilla.com",
+]
+
+[[rules]]
+notes = "Mozilla Normandy experiments"
+domains = [
+    "normandy.cdn.mozilla.net",
+    "normandy.services.mozilla.com",
+    "normandy-cdn.services.mozilla.com",
+    "normandy.tombstone.experimenter.prod.webservices.mozgcp.net",
+    "self-repair.mozilla.org",
+]
+
+[[rules]]
+notes = "Mozilla push notifications"
+domains = [
+    "push.services.mozilla.com",
+    "autopush.stage.mozaws.net",
+    "autopush.prod.mozaws.net",
+    "updates.push.services.mozilla.com",
+]
+
+[[rules]]
+notes = "Mozilla addon discovery"
+domains = [
+    "discovery.addons.mozilla.org",
+    "services.addons.mozilla.org",
+    "versioncheck.addons.mozilla.org",
+    "versioncheck-bg.addons.mozilla.org",
+]
+
+[[rules]]
+notes = "Mozilla experiments and analytics"
+domains = [
+    "experiments.mozilla.org",
+    "data.mozilla.com",
+    "dataops.mozgcp.net",
+    "analysis.telemetry.mozilla.org",
+]
+
+[[rules]]
+notes = "Pocket and sponsored content"
+domains = [
+    "ads.mozilla.org",
+    "ads-img.mozilla.org",
+    "contile.services.mozilla.com",
+    "contile-images.services.mozilla.com",
+    "spocs.getpocket.com",
+    "spocs.getpocket.dev",
+    "getpocket.cdn.mozilla.net",
+    "getpocket.com",
+    "img-getpocket.cdn.mozilla.net",
+    "widgets.getpocket.com",
+    "pocket.prod.cloudops.mozgcp.net",
+]
+
+[[rules]]
+notes = "Firefox snippets and activity stream"
+domains = [
+    "snippets.cdn.mozilla.net",
+    "snippets.mozilla.com",
+    "snippets-prod.moz.works",
+    "activity-stream-icons.services.mozilla.com",
+]
+
+[[rules]]
+notes = "Firefox Suggest and settings"
+domains = [
+    "suggest.mozilla.org",
+    "merino.services.mozilla.com",
+    "prod-images.merino.prod.webservices.mozgcp.net",
+    "firefox.settings.services.mozilla.com",
+    "firefox-settings-attachments.cdn.mozilla.net",
+]
+
+[[rules]]
+notes = "Mozilla location services"
+domains = [
+    "location.services.mozilla.com",
+    "location-learnmore.services.mozilla.com",
+]
+
+[[rules]]
+notes = "Mozilla client classification"
+domains = [
+    "classify-client.services.mozilla.com",
+    "content-signature-2.cdn.mozilla.net",
+    "detectportal.firefox.com",
+]
+
+[[rules]]
+notes = "Mozilla surveys and feedback"
+domains = [
+    "coverage.mozilla.org",
+    "qsurvey.mozilla.com",
+    "input.mozilla.org",
+    "reporter.mozilla.org",
+    "talkback-reports.mozilla.org",
+    "talkback-public.mozilla.org",
+]
+
+[[rules]]
+notes = "Mozilla statistics and download tracking"
+domains = [
+    "stats.mozilla.org",
+    "download-stats.mozilla.org",
+]
+
+[[rules]]
+notes = "Firefox Health Report (legacy)"
+domains = [
+    "fhr.data.mozilla.com",
+    "healthreport.mozilla.com",
+]

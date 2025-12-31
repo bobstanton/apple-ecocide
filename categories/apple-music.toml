@@ -1,0 +1,74 @@
+name = "Apple Music"
+description = "Blocks Apple Music streaming service"
+severity = "aggressive"
+
+impact = """
+- Apple Music streaming will not work
+- Cannot play songs from Apple Music library
+- Apple Music radio stations blocked
+- Music recommendations disabled
+- Lyrics may not load
+- Local/downloaded music should still play
+"""
+
+[[rules]]
+notes = "Apple Music streaming"
+domains = [
+    "music.apple.com",
+    "api.music.apple.com",
+    "amp-api.music.apple.com",
+]
+
+[[rules]]
+notes = "Apple Music playback"
+domains = [
+    "play.itunes.apple.com",
+    "streaming.music.apple.com",
+    "aod.itunes.apple.com",
+    "audio.itunes.apple.com",
+    "aaplimg.com",
+]
+
+[[rules]]
+notes = "Apple Music radio"
+domains = [
+    "radio.itunes.apple.com",
+    "radio.apple.com",
+    "radio-activity.itunes.apple.com",
+    "radio-services.itunes.apple.com",
+]
+
+[[rules]]
+notes = "Apple Music lyrics and metadata"
+domains = [
+    "lyrics.apple.com",
+    "genius.com",
+    "api.genius.com",
+]
+
+[[rules]]
+notes = "Apple Music social features"
+domains = [
+    "musickit.apple.com",
+    "musicprofile.apple.com",
+]
+
+[[rules]]
+notes = "Block Music app from all network access"
+deny-process = "/System/Applications/Music.app/Contents/MacOS/Music"
+
+[[rules]]
+notes = "Block Music device discovery agent from all network access"
+deny-process = "/System/Library/PrivateFrameworks/AMPDevices.framework/Versions/A/Support/AMPDeviceDiscoveryAgent"
+
+[[rules]]
+notes = "Block iTunes Cloud daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/iTunesCloud.framework/Support/itunescloudd"
+
+[[rules]]
+notes = "Block Media Remote agent from all network access"
+deny-process = "/System/Library/PrivateFrameworks/MediaRemote.framework/Support/mediaremoteagent"
+
+[[rules]]
+notes = "Block Media Remote daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/MediaRemote.framework/Support/mediaremoted"

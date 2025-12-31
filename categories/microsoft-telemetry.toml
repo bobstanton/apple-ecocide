@@ -1,0 +1,132 @@
+name = "Microsoft Telemetry"
+description = "Blocks Microsoft/Windows telemetry, diagnostics, and tracking (untested on macOS)"
+severity = "minimal"
+
+impact = """
+- Windows telemetry not sent to Microsoft
+- Microsoft Office telemetry blocked
+- VS Code telemetry and crash reports blocked
+- Cortana and Bing services may not work
+- OneDrive sync may be affected
+- Some Microsoft apps may have reduced functionality
+"""
+
+[[rules]]
+notes = "Microsoft telemetry endpoints"
+domains = [
+    "telemetry.microsoft.com",
+    "vortex.data.microsoft.com",
+    "vortex-win.data.microsoft.com",
+    "telecommand.telemetry.microsoft.com",
+    "watson.telemetry.microsoft.com",
+    "watson.microsoft.com",
+    "umwatsontest.events.data.microsoft.com",
+    "ceuswatcab01.blob.core.windows.net",
+    "ceuswatcab02.blob.core.windows.net",
+]
+
+[[rules]]
+notes = "Microsoft diagnostics"
+domains = [
+    "settings-win.data.microsoft.com",
+    "v10.events.data.microsoft.com",
+    "v20.events.data.microsoft.com",
+    "events.data.microsoft.com",
+    "diagnostics.support.microsoft.com",
+]
+
+[[rules]]
+notes = "Microsoft feedback and surveys"
+domains = [
+    "feedback.microsoft-hohm.com",
+    "feedback.windows.com",
+    "feedback.search.microsoft.com",
+    "survey.watson.microsoft.com",
+]
+
+[[rules]]
+notes = "Microsoft Bing tracking"
+domains = [
+    "ads.bing.com",
+    "a.ads2.msads.net",
+    "ads.msn.com",
+    "adnxs.com",
+    "c.msn.com",
+    "c.bing.com",
+]
+
+[[rules]]
+notes = "Microsoft advertising"
+domains = [
+    "choice.microsoft.com",
+    "choice.microsoft.com.nstac.net",
+    "df.telemetry.microsoft.com",
+    "reports.wes.df.telemetry.microsoft.com",
+    "redir.metaservices.microsoft.com",
+    "c.atdmt.com",
+    "atdmt.com",
+    "flex.msn.com",
+    "g.msn.com",
+]
+
+[[rules]]
+notes = "Microsoft SmartScreen (web filter)"
+domains = [
+    "smartscreen.microsoft.com",
+    "smartscreen-prod.microsoft.com",
+    "urs.microsoft.com",
+    "urs.smartscreen.microsoft.com",
+]
+
+[[rules]]
+notes = "Microsoft account activity"
+domains = [
+    "activity.windows.com",
+    "edge.activity.windows.com",
+]
+
+[[rules]]
+notes = "Cortana and search"
+domains = [
+    "cortana.ai",
+    "www.cortana.ai",
+    "cortana.search.msn.com",
+]
+
+[[rules]]
+notes = "Office telemetry"
+domains = [
+    "nexus.officeapps.live.com",
+    "nexusrules.officeapps.live.com",
+    "mobile.pipe.aria.microsoft.com",
+    "office.pipe.aria.microsoft.com",
+    "browser.pipe.aria.microsoft.com",
+]
+
+[[rules]]
+notes = "Windows Spotlight and tips"
+domains = [
+    "arc.msn.com",
+    "ris.api.iris.microsoft.com",
+    "query.prod.cms.rt.microsoft.com",
+]
+
+[[rules]]
+notes = "VS Code telemetry"
+domains = [
+    "dc.services.visualstudio.com",
+    "vscode.dev",
+    "default.exp-tas.com",
+    "vscode-sync.trafficmanager.net",
+    "vscode-sync-insiders.trafficmanager.net",
+    "vscode.blob.core.windows.net",
+    "az764295.vo.msecnd.net",
+    "vscode.download.prss.microsoft.com",
+]
+
+[[rules]]
+notes = "VS Code crash reporting"
+domains = [
+    "vscode.search.windows.net",
+    "vsmarketplacebadges.dev",
+]

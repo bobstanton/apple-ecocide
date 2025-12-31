@@ -1,0 +1,111 @@
+name = "Brave Browser Telemetry"
+description = "Blocks Brave browser telemetry, P3A analytics, and tracking services"
+severity = "minimal"
+
+impact = """
+- Brave P3A telemetry not sent (privacy-preserving analytics)
+- Brave updates may be blocked
+- Brave Rewards and Ads disabled
+- Brave Sync disabled
+- Brave Search blocked (if you don't use it)
+- Brave Today news blocked
+"""
+
+[[rules]]
+notes = "Brave P3A telemetry"
+domains = [
+    "p3a.brave.com",
+    "p3a-json.brave.com",
+    "p3a-creative.brave.com",
+]
+
+[[rules]]
+notes = "Brave STAR randomized telemetry"
+domains = [
+    "star-randsrv.brave.com",
+    "star-randsrv.bravesoftware.com",
+]
+
+[[rules]]
+notes = "Brave component and browser updates"
+domains = [
+    "componentupdater.brave.com",
+    "go-updater.brave.com",
+    "updates.brave.com",
+    "updates-cdn.brave.com",
+    "updates.bravesoftware.com",
+    "laptop-updates.brave.com",
+    "laptop-updates-staging.brave.com",
+]
+
+[[rules]]
+notes = "Brave variations/experiments"
+domains = [
+    "variations.brave.com",
+    "variations.bravesoftware.com",
+]
+
+[[rules]]
+notes = "Brave static content"
+domains = [
+    "static.brave.com",
+    "static1.brave.com",
+    "static2.brave.com",
+]
+
+[[rules]]
+notes = "Brave extensions and Brave Today"
+domains = [
+    "brave-core-ext.s3.brave.com",
+    "brave-today-cdn.brave.com",
+    "pcdn.brave.com",
+]
+
+[[rules]]
+notes = "Brave Ads and Rewards"
+domains = [
+    "ads.brave.com",
+    "ads-serve.brave.com",
+    "ads-static.brave.com",
+    "mywallet.ads.brave.com",
+    "grant.rewards.brave.com",
+    "rewards.brave.com",
+]
+
+[[rules]]
+notes = "Brave API services"
+domains = [
+    "api.brave.com",
+    "api.brave.software",
+    "api.bravesoftware.com",
+]
+
+[[rules]]
+notes = "Brave Sync"
+domains = [
+    "sync-v2.brave.com",
+    "sync.brave.com",
+    "sync.bravesoftware.com",
+]
+
+[[rules]]
+notes = "Brave crash reporting"
+domains = [
+    "cr.brave.com",
+    "cr.bravesoftware.com",
+]
+
+[[rules]]
+notes = "Brave geolocation"
+domains = [
+    "geo.brave.com",
+    "location.brave.com",
+    "location.bravesoftware.com",
+]
+
+[[rules]]
+notes = "Brave Search"
+domains = [
+    "search.brave.com",
+    "cdn.search.brave.com",
+]

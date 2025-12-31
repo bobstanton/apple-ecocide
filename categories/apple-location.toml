@@ -1,0 +1,66 @@
+name = "Apple Location Services"
+description = "Blocks Apple's location services daemon (geod) and location tracking infrastructure"
+severity = "aggressive"
+
+impact = """
+- Wi-Fi and cell tower based location will not work
+- GPS may still work but with reduced accuracy
+- Location-based features in all apps affected
+- Find My location sharing will not work
+- Weather location detection disabled
+- Geotagging photos will use GPS only
+- Location-based reminders may not trigger
+"""
+
+[[rules]]
+notes = "Apple Location Services (geod) - Wi-Fi/cell positioning"
+domains = [
+    "gspe1-ssl.ls.apple.com",
+    "gspe19-ssl.ls.apple.com",
+    "gspe21-ssl.ls.apple.com",
+    "gspe35-ssl.ls.apple.com",
+    "gsp-ssl.ls.apple.com",
+    "gsp1.apple.com",
+    "gsp9-ssl.apple.com",
+    "gsp10-ssl.apple.com",
+    "gspe21-ssl.ls-apple.com.akadns.net",
+    "gspe35-ssl.ls-apple.com.akadns.net",
+    "gspe21-applecdn-cutover.ls-apple.com.akadns.net",
+    "gspe35-applecdn-cutover.ls-apple.com.akadns.net",
+    "gspe21-cdn.v.aaplimg.com",
+    "gspe35-cdn.v.aaplimg.com",
+]
+
+[[rules]]
+notes = "Location services configuration"
+domains = [
+    "ls.apple.com",
+    "configuration.ls.apple.com",
+    "configuration.ls.v.aaplimg.com",
+    "configuration-lb.ls-apple.com.akadns.net",
+]
+
+[[rules]]
+notes = "Block location services daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/GeoServices.framework/Versions/A/XPCServices/com.apple.geod.xpc/Contents/MacOS/com.apple.geod"
+
+[[rules]]
+notes = "Block Geo Analytics daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/GeoAnalytics.framework/geoanalyticsd"
+
+[[rules]]
+notes = "Block Routine daemon (location patterns) from all network access"
+deny-process = "/usr/libexec/routined"
+
+[[rules]]
+notes = "Block Location daemon from all network access"
+deny-process = "/usr/libexec/locationd"
+
+[[rules]]
+notes = "Block Geo Services Mach bridge from all network access"
+deny-process = "/System/Library/PrivateFrameworks/GeoServices.framework/geodMachServiceBridge"
+
+[[rules]]
+notes = "Block Core Location Agent from all network access"
+deny-process = "/System/Library/CoreServices/CoreLocationAgent.app/Contents/MacOS/CoreLocationAgent"
+

@@ -1,0 +1,37 @@
+name = "Apple Screen Time"
+description = "Blocks Apple Screen Time and Family Sharing parental control features"
+severity = "aggressive"
+
+impact = """
+- Screen Time usage tracking will not sync across devices
+- Screen Time limits may not apply correctly
+- Family Sharing parental controls may not function
+- Ask to Buy requests will not be sent/received
+- App time limits may not sync between devices
+"""
+
+[[rules]]
+notes = "Screen Time web filter and usage reporting"
+domains = [
+    "api-kid.apple.com",
+]
+
+[[rules]]
+notes = "Block Screen Time permission request daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/AskPermission.framework/Versions/A/Resources/askpermissiond"
+
+[[rules]]
+notes = "Block Screen Time agent from all network access"
+deny-process = "/System/Library/PrivateFrameworks/ScreenTimeCore.framework/Versions/A/ScreenTimeAgent"
+
+[[rules]]
+notes = "Block Screen Time Usage Daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/UsageTracking.framework/Versions/A/UsageTrackingAgent"
+
+[[rules]]
+notes = "Block Family Circle daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/FamilyCircle.framework/Versions/A/Resources/familycircled"
+
+[[rules]]
+notes = "Block Managed Settings agent from all network access"
+deny-process = "/System/Library/Frameworks/ManagedSettings.framework/Versions/A/ManagedSettingsAgent"

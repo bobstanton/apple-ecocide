@@ -1,0 +1,165 @@
+name = "OCSP Certificate Verification"
+description = "Blocks Online Certificate Status Protocol (OCSP) for all certificate authorities"
+severity = "aggressive"
+
+impact = """
+- Certificate revocation checks will be blocked
+- May cause delays or failures when connecting to HTTPS sites
+- Apps requiring certificate validation may fail to launch
+- Some browsers may show certificate warnings
+- Reduces privacy leakage of browsing activity to CAs
+- See: sneak.berlin/20201112/your-computer-isnt-yours/
+"""
+
+[[rules]]
+notes = "Apple OCSP servers"
+domains = [
+    "ocsp.apple.com",
+    "ocsp2.apple.com",
+    "valid.apple.com",
+]
+
+[[rules]]
+notes = "Comodo/Sectigo OCSP"
+domains = [
+    "ocsp.comodoca.com",
+    "ocsp.sectigo.com",
+    "ocsp.usertrust.com",
+    "ocsp.comodo.com",
+]
+
+[[rules]]
+notes = "DigiCert OCSP"
+domains = [
+    "ocsp.digicert.com",
+    "ocsp.digicert.cn",
+    "cacerts.digicert.com",
+]
+
+[[rules]]
+notes = "Let's Encrypt OCSP"
+domains = [
+    "ocsp.letsencrypt.org",
+    "r3.o.lencr.org",
+    "e1.o.lencr.org",
+    "r4.o.lencr.org",
+    "e2.o.lencr.org",
+]
+
+[[rules]]
+notes = "GlobalSign OCSP"
+domains = [
+    "ocsp.globalsign.com",
+    "ocsp2.globalsign.com",
+]
+
+[[rules]]
+notes = "GeoTrust/RapidSSL OCSP"
+domains = [
+    "ocsp.geotrust.com",
+    "ocsp.rapidssl.com",
+]
+
+[[rules]]
+notes = "Entrust OCSP"
+domains = [
+    "ocsp.entrust.net",
+]
+
+[[rules]]
+notes = "GoDaddy OCSP"
+domains = [
+    "ocsp.godaddy.com",
+    "ocsp.starfieldtech.com",
+]
+
+[[rules]]
+notes = "Symantec/VeriSign/Thawte OCSP"
+domains = [
+    "ocsp.verisign.com",
+    "ocsp.thawte.com",
+    "ocsp.ws.symantec.com",
+]
+
+[[rules]]
+notes = "Microsoft OCSP"
+domains = [
+    "ocsp.msocsp.com",
+]
+
+[[rules]]
+notes = "Amazon Trust Services OCSP"
+domains = [
+    "ocsp.rootca1.amazontrust.com",
+    "ocsp.rootg2.amazontrust.com",
+    "ocsp.sca1a.amazontrust.com",
+    "ocsp.sca1b.amazontrust.com",
+    "o.ss2.us",
+]
+
+[[rules]]
+notes = "Cloudflare OCSP"
+domains = [
+    "ocsp.cloudflare.com",
+]
+
+[[rules]]
+notes = "Google Trust Services OCSP"
+domains = [
+    "ocsp.pki.goog",
+    "o.pki.goog",
+]
+
+[[rules]]
+notes = "Buypass OCSP"
+domains = [
+    "ocsp.buypass.com",
+    "ocsp.buypassca.com",
+]
+
+[[rules]]
+notes = "QuoVadis OCSP"
+domains = [
+    "ocsp.quovadisoffshore.com",
+    "ocsp.quovadisglobal.com",
+]
+
+[[rules]]
+notes = "SSL.com OCSP"
+domains = [
+    "ocsp.ssl.com",
+]
+
+[[rules]]
+notes = "Trustwave OCSP"
+domains = [
+    "ocsp.trustwave.com",
+]
+
+[[rules]]
+notes = "Block OCSP daemon from all network access"
+deny-process = "/usr/sbin/ocspd"
+
+[[rules]]
+notes = "Block System Policy daemon (Gatekeeper/notarization) from all network access"
+deny-process = "/usr/libexec/syspolicyd"
+
+[[rules]]
+notes = "Apple Trust Services (certificate transparency)"
+domains = [
+    "tbsc.apple.com",
+    "tbsc.apple.com.akadns.net",
+]
+
+[[rules]]
+notes = "Certificate Revocation Lists"
+domains = [
+    "certs.apple.com",
+    "crl.apple.com",
+    "crl3.digicert.com",
+    "crl4.digicert.com",
+]
+
+[[rules]]
+notes = "Block Certificate Transparency daemon from all network access"
+deny-process = "/usr/libexec/transparencyd"

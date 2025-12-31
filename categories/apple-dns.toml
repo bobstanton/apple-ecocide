@@ -1,0 +1,15 @@
+name = "Apple DNS (DoH)"
+description = "Blocks Apple's DNS over HTTPS encrypted DNS resolver"
+severity = "recommended"
+
+impact = """
+- Apple's encrypted DNS resolver will not be used
+- Configure an alternative DoH/DoT provider for privacy
+- DNS queries will use the configured system DNS instead
+"""
+
+[[rules]]
+notes = "Apple DNS over HTTPS"
+domains = [
+    "doh.dns.apple.com",
+]

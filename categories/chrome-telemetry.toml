@@ -1,0 +1,57 @@
+name = "Google Chrome Telemetry"
+description = "Blocks Chrome-specific telemetry, updates, and services"
+severity = "minimal"
+
+impact = """
+- Chrome telemetry and crash reports not sent
+- Chrome auto-updates may be blocked
+- Chrome sync may not work
+- Safe Browsing protection disabled
+- Content suggestions disabled
+- Password leak detection disabled
+"""
+
+[[rules]]
+notes = "Chrome update and telemetry clients"
+domains = [
+    "clients1.google.com",
+    "clients2.google.com",
+    "clients3.google.com",
+    "clients4.google.com",
+    "clients5.google.com",
+    "clients6.google.com",
+]
+
+[[rules]]
+notes = "Chrome update services"
+domains = [
+    "update.googleapis.com",
+    "clientservices.googleapis.com",
+    "chromecontentsuggestions-pa.googleapis.com",
+    "chromereporting-pa.googleapis.com",
+    "chromedesktop.googleapis.com",
+]
+
+[[rules]]
+notes = "Chrome optimization and features"
+domains = [
+    "optimizationguide-pa.googleapis.com",
+    "content-autofill.googleapis.com",
+    "passwordsleakcheck-pa.googleapis.com",
+    "crashpad.googleapis.com",
+]
+
+[[rules]]
+notes = "Chrome downloads and tools"
+domains = [
+    "chrome.google.com",
+    "dl.google.com",
+    "tools.google.com",
+]
+
+[[rules]]
+notes = "Chromium services"
+domains = [
+    "chromium-i18n.appspot.com",
+    "chromium.googlesource.com",
+]

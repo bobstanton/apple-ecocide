@@ -1,0 +1,27 @@
+name = "Apple Game Center"
+description = "Blocks Apple Game Center gaming social network and achievements"
+severity = "aggressive"
+
+impact = """
+- Game Center sign-in will not work
+- Achievements and leaderboards unavailable
+- Multiplayer matchmaking will not function
+- Game progress sync across devices blocked
+- Turn-based games will not update
+"""
+
+[[rules]]
+notes = "Game Center services"
+domains = [
+    "gc.apple.com",
+    "gamecenterd.apple.com",
+    "service.gc.apple.com",
+]
+
+[[rules]]
+notes = "Block Game Center daemon from all network access"
+deny-process = "/usr/libexec/gamed"
+
+[[rules]]
+notes = "Block Game Center UI agent from all network access"
+deny-process = "/System/Library/PrivateFrameworks/GameCenterUICore.framework/XPCServices/com.apple.gamecenter.GameCenterUIService.xpc/Contents/MacOS/com.apple.gamecenter.GameCenterUIService"

@@ -1,0 +1,249 @@
+name = "Apple iCloud"
+description = "Blocks all iCloud services including Drive, Photos, Mail, Calendar, Contacts, Notes, and sync"
+severity = "aggressive"
+
+impact = """
+- iCloud Drive will not sync files
+- iCloud Photos will not sync
+- iCloud Mail will not work
+- Calendar, Contacts, Notes, Reminders will not sync
+- iCloud Keychain/Passwords will not sync
+- Apple ID login will be blocked
+- iCloud Backup will not function
+- Handoff and Continuity features may be affected
+"""
+
+[[rules]]
+notes = "iCloud main services"
+domains = [
+    "icloud.com",
+    "www.icloud.com",
+    "icloud.apple.com",
+    "icloud-content.com",
+]
+
+[[rules]]
+notes = "iCloud/Apple ID authentication"
+domains = [
+    "setup.icloud.com",
+    "setup.apple.com",
+    "idmsa.apple.com",
+    "appleid.apple.com",
+    "appleid.cdn-apple.com",
+    "iforgot.apple.com",
+    "gsa.apple.com",
+    "gsas.apple.com",
+]
+
+[[rules]]
+notes = "iCloud CloudKit database services"
+domains = [
+    "keyvalueservice.icloud.com",
+    "kvstore.icloud.com",
+    "ckdatabase.icloud.com",
+    "ckdevice.icloud.com",
+    "ckconfiguration.icloud.com",
+]
+
+[[rules]]
+notes = "iCloud gateway and quota services"
+domains = [
+    "gateway.icloud.com",
+    "webcourier.push.apple.com",
+    "quota.icloud.com",
+]
+
+[[rules]]
+notes = "iCloud Mail, Calendar, Contacts sync"
+domains = [
+    "mail.me.com",
+    "smtp.mail.me.com",
+    "imap.mail.me.com",
+    "caldav.icloud.com",
+    "carddav.icloud.com",
+    "contacts.icloud.com",
+    "calendar.icloud.com",
+]
+
+[[rules]]
+notes = "iCloud Photos"
+domains = [
+    "photos.icloud.com",
+    "sharedstreams.icloud.com",
+]
+
+[[rules]]
+notes = "iCloud metrics and feedback"
+domains = [
+    "metrics.icloud.com",
+    "xp.icloud-content.com",
+    "feedbackws.icloud.com",
+]
+
+[[rules]]
+notes = "iCloud Private Relay and Oblivious HTTP"
+domains = [
+    "apple-relay.cloudflare.com",
+    "apple-relay.fastly-edge.com",
+    "apple-relay.apple.com",
+    "cp4.cloudflare.com",
+    "mask.icloud.com",
+    "mask-h2.icloud.com",
+    "mask-api.icloud.com",
+    "gateway-oblivious.apple.com",
+]
+
+[[rules]]
+notes = "iCloud China endpoints"
+domains = [
+    "www.icloud.com.cn",
+    "icloud.com.cn",
+    "apzones.com",
+]
+
+[[rules]]
+notes = "CloudKit platform services"
+domains = [
+    "apple-cloudkit.com",
+    "api.apple-cloudkit.com",
+]
+
+[[rules]]
+notes = "iCloud Live Photos"
+domains = [
+    "apple-livephotoskit.com",
+]
+
+[[rules]]
+notes = "iWork document services"
+domains = [
+    "iwork.apple.com",
+]
+
+[[rules]]
+notes = "Apple Account management"
+domains = [
+    "account.apple.com",
+]
+
+[[rules]]
+notes = "iCloud static resources"
+domains = [
+    "statici.icloud.com",
+]
+
+[[rules]]
+notes = "Block iCloud sync daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/CloudKitDaemon.framework/Support/cloudd"
+
+[[rules]]
+notes = "Block iCloud document sync (bird) from all network access"
+deny-process = "/System/Library/PrivateFrameworks/iCloudDriveCore.framework/Versions/A/Support/bird"
+
+[[rules]]
+notes = "Block Notes app from all network access"
+deny-process = "/System/Applications/Notes.app/Contents/MacOS/Notes"
+
+[[rules]]
+notes = "Block Reminders app from all network access"
+deny-process = "/System/Applications/Reminders.app/Contents/MacOS/Reminders"
+
+[[rules]]
+notes = "Block Reminders daemon from all network access"
+deny-process = "/usr/libexec/remindd"
+
+[[rules]]
+notes = "Block Contacts daemon from all network access"
+deny-process = "/System/Library/Frameworks/Contacts.framework/Support/contactsd"
+
+[[rules]]
+notes = "Block Call History sync from all network access"
+deny-process = "/System/Library/PrivateFrameworks/CallHistory.framework/Support/CallHistorySyncHelper"
+
+[[rules]]
+notes = "Block AuthKit daemon (Apple ID authentication) from all network access"
+deny-process = "/System/Library/PrivateFrameworks/AuthKit.framework/Versions/A/Support/akd"
+
+[[rules]]
+notes = "Block Data Access daemon (Calendar/Contacts/Mail sync) from all network access"
+deny-process = "/System/Library/PrivateFrameworks/DataAccess.framework/Support/dataaccessd"
+
+[[rules]]
+notes = "Block iCloud Notification Agent from all network access"
+deny-process = "/System/Library/PrivateFrameworks/iCloudNotification.framework/iCloudNotificationAgent"
+
+[[rules]]
+notes = "Block Mail daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/EmailDaemon.framework/Versions/A/maild"
+
+[[rules]]
+notes = "Block iCloud Mail agent from all network access"
+deny-process = "/usr/libexec/icloudmailagent"
+
+[[rules]]
+notes = "Block Calendar access daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/CalendarDaemon.framework/Support/calaccessd"
+
+[[rules]]
+notes = "Block Rapport daemon (Handoff/Continuity) from all network access"
+deny-process = "/usr/libexec/rapportd"
+
+[[rules]]
+notes = "Block Sharing daemon (AirDrop) from all network access"
+deny-process = "/usr/libexec/sharingd"
+
+[[rules]]
+notes = "Block Nearby daemon from all network access"
+deny-process = "/usr/libexec/nearbyd"
+
+[[rules]]
+notes = "Block Synced Defaults daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/SyncedDefaults.framework/Support/syncdefaultsd"
+
+[[rules]]
+notes = "Block Replicator daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/ReplicatorCore.framework/Support/replicatord"
+
+[[rules]]
+notes = "Block Protected Cloud Key Syncing from all network access"
+deny-process = "/System/Library/PrivateFrameworks/ProtectedCloudStorage.framework/Helpers/ProtectedCloudKeySyncing"
+
+[[rules]]
+notes = "Block CDP daemon (iCloud Device Pairing) from all network access"
+deny-process = "/System/Library/PrivateFrameworks/CoreCDP.framework/Versions/A/Resources/cdpd"
+
+[[rules]]
+notes = "Block Apple Account daemon from all network access"
+deny-process = "/usr/libexec/appleaccountd"
+
+[[rules]]
+notes = "Block Accounts daemon from all network access"
+deny-process = "/System/Library/Frameworks/Accounts.framework/Versions/A/Support/accountsd"
+
+[[rules]]
+notes = "Block iCloud sync daemon (sbd) from all network access"
+deny-process = "/System/Library/PrivateFrameworks/CloudServices.framework/Helpers/com.apple.sbd"
+
+[[rules]]
+notes = "Block Do Not Disturb daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/DoNotDisturbServer.framework/Support/donotdisturbd"
+
+[[rules]]
+notes = "Block File Provider daemon (iCloud Drive) from all network access"
+deny-process = "/System/Library/PrivateFrameworks/FileProvider.framework/Support/fileproviderd"
+
+[[rules]]
+notes = "Block Media Analysis daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/MediaAnalysis.framework/Versions/A/mediaanalysisd"
+
+[[rules]]
+notes = "Block Photo Analysis daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/PhotoAnalysis.framework/Versions/A/Support/photoanalysisd"
+
+[[rules]]
+notes = "Block Photo Library daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/PhotoLibraryServices.framework/Versions/A/Support/photolibraryd"
+
+[[rules]]
+notes = "Block User Activity daemon (Handoff) from all network access"
+deny-process = "/System/Library/PrivateFrameworks/UserActivity.framework/Agents/useractivityd"

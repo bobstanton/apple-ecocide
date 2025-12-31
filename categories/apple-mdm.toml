@@ -1,0 +1,123 @@
+name = "Apple Mobile Device Management (MDM)"
+description = "Blocks Apple MDM, Device Enrollment, and enterprise management services to prevent unauthorized device management"
+severity = "recommended"
+
+impact = """
+- Prevents MDM enrollment and remote device management
+- Blocks Device Enrollment Program (DEP) provisioning
+- Enterprise/school device management will not work
+- Reduces attack surface for MDM-based exploits
+- May affect corporate-managed devices
+- Recommended for personal devices not managed by an organization
+"""
+
+[[rules]]
+notes = "MDM enrollment and management"
+domains = [
+    "mdmenrollment.apple.com",
+    "deviceenrollment.apple.com",
+    "iprofiles.apple.com",
+]
+
+[[rules]]
+notes = "Device Enrollment Program (DEP)"
+domains = [
+    "axm-adm-enroll.apple.com",
+    "axm-adm-mdm.apple.com",
+    "axm-adm-scep.apple.com",
+]
+
+[[rules]]
+notes = "Apple Business/School Manager"
+domains = [
+    "business.apple.com",
+    "school.apple.com",
+    "api.ent.apple.com",
+    "api.edu.apple.com",
+    "api-business.apple.com",
+    "api-school.apple.com",
+]
+
+[[rules]]
+notes = "Apple Business Essentials"
+domains = [
+    "axm-app.apple.com",
+    "axm-servicediscovery.apple.com",
+    "icons.axm-usercontent-apple.com",
+]
+
+[[rules]]
+notes = "Volume Purchase Program (VPP)"
+domains = [
+    "vpp.itunes.apple.com",
+]
+
+[[rules]]
+notes = "MDM identity and certificate services"
+domains = [
+    "identity.apple.com",
+]
+
+[[rules]]
+notes = "Classroom and Schoolwork apps"
+domains = [
+    "ws.school.apple.com",
+    "ws-ee-maidsvc.icloud.com",
+    "pg-bootstrap.itunes.apple.com",
+    "cls-iosclient.itunes.apple.com",
+    "cls-ingest.itunes.apple.com",
+]
+
+[[rules]]
+notes = "SFTP uploads for school content"
+domains = [
+    "upload.appleschoolcontent.com",
+]
+
+[[rules]]
+notes = "Device location tracking (business)"
+domains = [
+    "apple-mapkit.com",
+]
+
+[[rules]]
+notes = "Tax validation services"
+domains = [
+    "vertexsmb.com",
+]
+
+[[rules]]
+notes = "Block Classroom/education daemon from all network access"
+deny-process = "/usr/libexec/studentd"
+
+[[rules]]
+notes = "Block Remote Management daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/RemoteManagement.framework/remotemanagementd"
+
+[[rules]]
+notes = "Block Mobile Activation daemon from all network access"
+deny-process = "/usr/libexec/mobileactivationd"
+
+[[rules]]
+notes = "Block Interactive Legacy Profiles Subscriber from all network access"
+deny-process = "/System/Library/PrivateFrameworks/RemoteManagement.framework/XPCServices/InteractiveLegacyProfilesSubscriber.xpc/Contents/MacOS/InteractiveLegacyProfilesSubscriber"
+
+[[rules]]
+notes = "Block Legacy Profiles Subscriber from all network access"
+deny-process = "/System/Library/PrivateFrameworks/RemoteManagement.framework/XPCServices/LegacyProfilesSubscriber.xpc/Contents/MacOS/LegacyProfilesSubscriber"
+
+[[rules]]
+notes = "Block Managed Configuration Files Subscriber from all network access"
+deny-process = "/System/Library/PrivateFrameworks/RemoteManagement.framework/XPCServices/ManagedConfigurationFilesSubscriber.xpc/Contents/MacOS/ManagedConfigurationFilesSubscriber"
+
+[[rules]]
+notes = "Block Managed Settings Agent from all network access"
+deny-process = "/System/Library/Frameworks/ManagedSettings.framework/Versions/A/ManagedSettingsAgent"
+
+[[rules]]
+notes = "Block Beta Enrollment daemon from all network access"
+deny-process = "/usr/libexec/betaenrollmentd"
+
+[[rules]]
+notes = "Block Beta Enrollment agent from all network access"
+deny-process = "/usr/libexec/betaenrollmentagent"

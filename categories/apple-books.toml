@@ -1,0 +1,41 @@
+name = "Apple Books"
+description = "Blocks Apple Books store and reading sync"
+severity = "aggressive"
+
+impact = """
+- Cannot purchase or download books from Apple Books
+- Book store will not load
+- Reading progress may not sync across devices
+- Audiobooks will not stream
+- Already downloaded books should still be readable
+"""
+
+[[rules]]
+notes = "Apple Books store"
+domains = [
+    "books.apple.com",
+    "api.books.apple.com",
+    "book.itunes.apple.com",
+]
+
+[[rules]]
+notes = "Apple Books content delivery"
+domains = [
+    "bookkeeper.itunes.apple.com",
+    "books-storage.itunes.apple.com",
+]
+
+[[rules]]
+notes = "Apple Audiobooks"
+domains = [
+    "audiobooks.apple.com",
+    "audiobooks.itunes.apple.com",
+]
+
+[[rules]]
+notes = "Block Books app from all network access"
+deny-process = "/System/Applications/Books.app/Contents/MacOS/Books"
+
+[[rules]]
+notes = "Block Books agent from all network access"
+deny-process = "/System/Library/PrivateFrameworks/BookKit.framework/Versions/A/XPCServices/com.apple.BKAgentService.xpc/Contents/MacOS/com.apple.BKAgentService"

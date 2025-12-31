@@ -1,0 +1,24 @@
+name = "Apple Captive Portal Detection"
+description = "Blocks Apple's captive portal detection used to identify WiFi login pages"
+severity = "aggressive"
+
+impact = """
+- Public WiFi login pages may not appear automatically
+- Hotel, airport, coffee shop WiFi may require manual browser navigation
+- Network connectivity status may show incorrectly
+- You may need to manually open a browser to trigger login pages
+"""
+
+[[rules]]
+notes = "Captive portal detection servers"
+domains = [
+    "captive.apple.com",
+    "captive-cdn.origin-apple.com.akadns.net",
+    "captive-cidr.origin-apple.com.akadns.net",
+    "captive-geo.origin-apple.com.akadns.net",
+    "captive.g.aaplimg.com",
+]
+
+[[rules]]
+notes = "Block Captive Network Agent from all network access"
+deny-process = "/usr/libexec/captiveagent"

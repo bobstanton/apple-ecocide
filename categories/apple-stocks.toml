@@ -1,0 +1,24 @@
+name = "Apple Stocks"
+description = "Blocks Apple Stocks app data and market information"
+severity = "aggressive"
+
+impact = """
+- Stocks app will not display market data
+- Stock quotes and charts will not update
+- Watchlist sync may be affected
+- Business news in Stocks app unavailable
+"""
+
+[[rules]]
+notes = "Stocks app data services"
+domains = [
+    "stocks-edge.apple.com",
+]
+
+[[rules]]
+notes = "Block Stocks app from all network access"
+deny-process = "/System/Applications/Stocks.app/Contents/MacOS/Stocks"
+
+[[rules]]
+notes = "Block Stocks widget from all network access"
+deny-process = "/System/Applications/Stocks.app/Contents/PlugIns/StocksWidget.appex/Contents/MacOS/StocksWidget"

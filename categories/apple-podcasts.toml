@@ -1,0 +1,39 @@
+name = "Apple Podcasts"
+description = "Blocks Apple Podcasts app and podcast directory"
+severity = "aggressive"
+
+impact = """
+- Apple Podcasts app will not load content
+- Cannot browse or search podcasts
+- Podcast subscriptions will not sync
+- New episodes will not download
+- Consider using alternative podcast apps
+"""
+
+[[rules]]
+notes = "Apple Podcasts services"
+domains = [
+    "podcasts.apple.com",
+    "api.podcasts.apple.com",
+    "amp-api.podcasts.apple.com",
+]
+
+[[rules]]
+notes = "Apple Podcasts playback and feeds"
+domains = [
+    "podcast.itunes.apple.com",
+    "podcastsconnect.apple.com",
+    "pcmaint.itunes.apple.com",
+]
+
+[[rules]]
+notes = "Apple Podcasts analytics"
+domains = [
+    "podcasts-analytics.apple.com",
+    "podcast-edge.itunes.apple.com",
+]
+
+[[rules]]
+notes = "Block Podcasts app from all network access"
+deny-process = "/System/Applications/Podcasts.app/Contents/MacOS/Podcasts"
+

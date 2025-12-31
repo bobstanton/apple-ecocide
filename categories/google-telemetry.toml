@@ -1,0 +1,103 @@
+name = "Google Telemetry & Analytics"
+description = "Blocks Google Analytics, Tag Manager, Firebase, and tracking services"
+severity = "minimal"
+
+impact = """
+- Google Analytics tracking blocked on all websites
+- Google Tag Manager will not load
+- Firebase analytics and crash reporting blocked
+- Website owners cannot track your visits via Google
+- Some websites may have reduced functionality
+"""
+
+[[rules]]
+notes = "Google Analytics"
+domains = [
+    "www.google-analytics.com",
+    "google-analytics.com",
+    "ssl.google-analytics.com",
+    "analytics.google.com",
+]
+
+[[rules]]
+notes = "Google Tag Manager"
+domains = [
+    "tagmanager.google.com",
+    "www.googletagmanager.com",
+    "googletagservices.com",
+]
+
+[[rules]]
+notes = "Google beacons/tracking"
+domains = [
+    "beacons.gcp.gvt2.com",
+    "beacons.gvt2.com",
+    "beacons2.gvt2.com",
+    "beacons3.gvt2.com",
+    "beacons4.gvt2.com",
+    "beacons5.gvt2.com",
+    "beacons.gvt3.com",
+]
+
+[[rules]]
+notes = "Google Optimize and app measurement"
+domains = [
+    "www.googleoptimize.com",
+    "googleoptimize.com",
+    "optimize.google.com",
+    "app-measurement.com",
+]
+
+[[rules]]
+notes = "Firebase services"
+domains = [
+    "firebase-settings.crashlytics.com",
+    "firebaseinstallations.googleapis.com",
+    "firebaselogging.googleapis.com",
+    "firebaselogging-pa.googleapis.com",
+    "firebase.googleapis.com",
+    "fcm.googleapis.com",
+    "firebaseremoteconfig.googleapis.com",
+]
+
+[[rules]]
+notes = "Google surveys and feedback"
+domains = [
+    "surveys.google.com",
+    "csp.withgoogle.com",
+    "ogs.google.com",
+    "feedbackextension.google.com",
+]
+
+[[rules]]
+notes = "Google ID tracking"
+domains = [
+    "id.google.com",
+    "id.google.co.uk",
+    "id.google.com.au",
+    "fundingchoicesmessages.google.com",
+    "contributor.google.com",
+]
+
+[[rules]]
+notes = "YouTube stats/tracking"
+domains = [
+    "s.youtube.com",
+    "video-stats.l.google.com",
+]
+
+[[rules]]
+notes = "Google AMP tracking"
+domains = [
+    "ampcid.google.com",
+    "ampproject.org",
+    "cdn.ampproject.org",
+    "amp.google.com",
+]
+
+[[rules]]
+notes = "Google geolocation services"
+domains = [
+    "userlocation.googleapis.com",
+    "geolocation.googleapis.com",
+]

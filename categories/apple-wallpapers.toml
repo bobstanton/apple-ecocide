@@ -1,0 +1,17 @@
+name = "Apple Wallpapers & Screensavers"
+description = "Blocks Apple aerial screensavers and dynamic wallpaper downloads"
+severity = "aggressive"
+
+impact = """
+- Aerial screensavers will not download new videos
+- Dynamic wallpapers may not update
+- Already downloaded content will still work
+"""
+
+[[rules]]
+notes = "Aerial screensavers and wallpapers"
+domains = [
+    "sylvan.apple.com",
+    "sylvan.g.aaplimg.com",
+    "sylvan.apple.com.akadns.net",
+]

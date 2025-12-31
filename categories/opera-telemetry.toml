@@ -1,0 +1,91 @@
+name = "Opera Browser Telemetry"
+description = "Blocks Opera browser telemetry, ads, and tracking services"
+severity = "minimal"
+
+impact = """
+- Opera telemetry not sent
+- Opera auto-updates may be blocked
+- Opera news feed disabled
+- Opera ads blocked
+- Speed dial suggestions disabled
+- Opera crypto wallet services blocked
+"""
+
+[[rules]]
+notes = "Opera core telemetry"
+domains = [
+    "telemetry.opera.com",
+    "telemetry-2.opera.com",
+    "telemetry-3.opera.com",
+]
+
+[[rules]]
+notes = "Opera auto-update"
+domains = [
+    "autoupdate.geo.opera.com",
+    "autoupdate.opera.com",
+    "update.opera.com",
+]
+
+[[rules]]
+notes = "Opera site check"
+domains = [
+    "sitecheck2.opera.com",
+    "sitecheck.opera.com",
+]
+
+[[rules]]
+notes = "Opera partner content and extensions"
+domains = [
+    "partner-content.opera.com",
+    "speeddials.opera.com",
+    "extension-updates.opera.com",
+    "addons.opera.com",
+]
+
+[[rules]]
+notes = "Opera advertising"
+domains = [
+    "ads.opera.com",
+    "oaads.opera.com",
+    "ads-exchange.opera.com",
+]
+
+[[rules]]
+notes = "Opera news feed"
+domains = [
+    "desktop-feed.opera.com",
+    "desktop-feed-pa.opera.com",
+    "news.opera.com",
+    "news-sources.opera.com",
+]
+
+[[rules]]
+notes = "Opera search suggestions"
+domains = [
+    "suggestion.opera.com",
+    "suggestions.opera.com",
+    "search.opera.com",
+]
+
+[[rules]]
+notes = "Opera geolocation"
+domains = [
+    "geoloc.opera.com",
+    "geolocation.otsync.cz",
+]
+
+[[rules]]
+notes = "Opera browser API"
+domains = [
+    "browser.opera.com",
+    "browser-api.opera.com",
+    "api.opera.com",
+]
+
+[[rules]]
+notes = "Opera crypto wallet"
+domains = [
+    "crypto.opera.com",
+    "crypto-wallet.opera.com",
+]

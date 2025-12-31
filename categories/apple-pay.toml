@@ -1,0 +1,39 @@
+name = "Apple Pay"
+description = "Blocks Apple Pay and identity verification services"
+severity = "aggressive"
+
+impact = """
+- Apple Pay transactions may not work
+- Adding new cards to Apple Wallet may fail
+- Identity verification for Apple services blocked
+- Apple Card features may not function
+"""
+
+[[rules]]
+notes = "Tap to Pay on iPhone"
+domains = [
+    "pos-device.apple.com",
+]
+
+[[rules]]
+notes = "ID Verifier on iPhone"
+domains = [
+    "idv.cdn-apple.com",
+    "idv-prod1.apple.com",
+]
+
+[[rules]]
+notes = "Apple Pay setup and provisioning"
+domains = [
+    "humb.apple.com",
+    "wallet.cdn-apple.com",
+    "wallet.g.aaplimg.com",
+]
+
+[[rules]]
+notes = "Block Wallet/Passes daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/PassKitCore.framework/passd"
+
+[[rules]]
+notes = "Block Finance daemon from all network access"
+deny-process = "/System/Library/Frameworks/FinanceKit.framework/financed"

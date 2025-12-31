@@ -1,0 +1,19 @@
+name = "Google Safe Browsing"
+description = "Blocks Google Safe Browsing which checks URLs for malware and phishing"
+severity = "aggressive"
+
+impact = """
+- No warnings for malicious/phishing websites
+- Malware download protection disabled
+- Deceptive site warnings disabled
+- Consider alternative security measures
+"""
+
+[[rules]]
+notes = "Google Safe Browsing"
+domains = [
+    "safebrowsing.googleapis.com",
+    "safebrowsing.google.com",
+    "safebrowsing-cache.google.com",
+    "sb-ssl.google.com",
+]

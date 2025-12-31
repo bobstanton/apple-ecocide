@@ -1,0 +1,367 @@
+name = "Apple Telemetry & Analytics"
+description = "Blocks Apple diagnostics, crash reporting, analytics, and behavioral tracking"
+severity = "minimal"
+
+impact = """
+- Apple will not receive crash reports from your device
+- Diagnostics and usage data will not be sent
+- A/B testing and experiments will not function
+- Apple cannot collect behavioral analytics
+- Beta program telemetry blocked
+"""
+
+[[rules]]
+notes = "Apple diagnostics and crash reporting"
+domains = [
+    "idiagnostics.apple.com",
+    "idiagnostics.apple.com.akadns.net",
+    "diagassets.apple.com",
+    "cssubmissions.apple.com",
+    "fba.apple.com",
+    "bpapi.apple.com",
+]
+
+[[rules]]
+notes = "Apple metrics collection"
+domains = [
+    "metrics.mzstatic.com",
+    "dzc-metrics.mzstatic.com",
+    "securemetrics.apple.com",
+]
+
+[[rules]]
+notes = "Smoot - Apple behavioral analytics and personalization"
+domains = [
+    "smoot.apple.com",
+    "api.smoot.apple.com",
+    "api-aka.smoot.apple.com",
+    "api-glb.smoot.apple.com",
+    "api-glb-ams.smoot.apple.com",
+    "api-glb-ash.smoot.apple.com",
+    "api-glb-atl.smoot.apple.com",
+    "api-glb-bln.smoot.apple.com",
+    "api-glb-dal.smoot.apple.com",
+    "api-glb-den.smoot.apple.com",
+    "api-glb-drf.smoot.apple.com",
+    "api-glb-fra.smoot.apple.com",
+    "api-glb-lax.smoot.apple.com",
+    "api-glb-lon.smoot.apple.com",
+    "api-glb-man.smoot.apple.com",
+    "api-glb-nyc.smoot.apple.com",
+    "api-glb-sea.smoot.apple.com",
+    "api-glb-sto.smoot.apple.com",
+    "daypass.api-aka.smoot.apple.com",
+    "daypass.api-glb-atl.smoot.apple.com",
+    "daypass.api-glb-lon.smoot.apple.com",
+    "daypass.api-glb-sea.smoot.apple.com",
+    "daypass.api-glb-sto.smoot.apple.com",
+    "cdn.smoot.apple.com",
+    "fbs.smoot.apple.com",
+    "bag.smoot.apple.com",
+    "api.smoot-apple.com.akadns.net",
+    "smoot-feedback.v.aaplimg.com",
+]
+
+[[rules]]
+notes = "Apple experience/experiment tracking"
+domains = [
+    "xp.apple.com",
+    "xp.itunes-apple.com.akadns.net",
+    "xp-cdn.apple.com",
+    "xp.v.aaplimg.com",
+    "xp-cdn-lb.itunes-apple.com.akadns.net",
+]
+
+[[rules]]
+notes = "Apple Radar bug reporting telemetry"
+domains = [
+    "radarsubmissions.apple.com",
+    "radarsubmissions.apple.com.akadns.net",
+]
+
+[[rules]]
+notes = "iPhone analytics submissions"
+domains = [
+    "iphonesubmissions.apple.com",
+    "iphonesubmissions.apple.com.akadns.net",
+    "iphonesubmissions-old.apple.com",
+]
+
+[[rules]]
+notes = "Apple Books analytics"
+domains = [
+    "books-analytics-events.apple.com",
+]
+
+[[rules]]
+notes = "Crashlytics (Google-owned crash reporting)"
+domains = [
+    "e.crashlytics.com",
+    "settings.crashlytics.com",
+]
+
+[[rules]]
+notes = "Apple Pancake - analytics aggregation"
+domains = [
+    "pancake.apple.com",
+    "pancake.apple.com.edgekey.net",
+    "pancake.cdn-apple.com.akadns.net",
+    "pancake.g.aaplimg.com",
+]
+
+[[rules]]
+notes = "Apple Silverbullet (A/B testing service)"
+domains = [
+    "silverbullet-external-ats.itunes.apple.com",
+    "silverbullet-external-ats.itunes-apple.com.akadns.net",
+]
+
+[[rules]]
+notes = "Apple Basejumper (analytics)"
+domains = [
+    "basejumper.apple.com",
+]
+
+[[rules]]
+notes = "Apple external services telemetry"
+domains = [
+    "outsideapple.apple.com",
+    "outsideapple.apple.com.akadns.net",
+]
+
+[[rules]]
+notes = "Apple ESS (Experience/Experiment Sync Services)"
+domains = [
+    "init.ess.apple.com",
+    "init.ess.apple.com.edgesuite.net",
+    "pds-init.ess.apple.com",
+    "query.ess.apple.com",
+    "query.ess-apple.com.akadns.net",
+    "profile.ess.apple.com",
+    "profile.ess-apple.com.akadns.net",
+    "identity.ess.apple.com",
+    "identity.ess-apple.com.akadns.net",
+    "static.ess.apple.com",
+    "commnat-cohort.ess.apple.com",
+    "commnat-cohort-gc.ess.apple.com",
+    "commnat-main.ess.apple.com",
+    "commnat-main-gc.ess.apple.com",
+]
+
+[[rules]]
+notes = "Apple media telemetry ingestion"
+domains = [
+    "mt-ingestion-service-pv.itunes.apple.com",
+    "mt-ingestion-service-pv.itunes-apple.com.akadns.net",
+    "mt-ingestion-service-mr22.itunes-apple.com.akadns.net",
+    "mt-ingestion-service-st11.itunes-apple.com.akadns.net",
+]
+
+[[rules]]
+notes = "TestFlight feedback telemetry"
+domains = [
+    "tf-feedback.itunes.apple.com",
+]
+
+[[rules]]
+notes = "Apple device management telemetry"
+domains = [
+    "nc-pod1-smp-device.apple.com",
+    "nc-pod1-smp-device.gcsis-apple.com.akadns.net",
+    "smp-device-content.apple.com",
+    "smp-device-content.g.aaplimg.com",
+    "smp-device-content.lb-apple.com.akadns.net",
+    "smp-device-content-us.lb-apple.com.akadns.net",
+    "deviceservices-external.apple.com",
+    "static.deviceservices.apple.com",
+]
+
+[[rules]]
+notes = "Apple PPQ telemetry endpoints"
+domains = [
+    "ppq-new-st.oa-apple.com.akadns.net",
+]
+
+[[rules]]
+notes = "Apple AI/ML data collection"
+domains = [
+    "aidc.apple.com",
+]
+
+[[rules]]
+notes = "Apple internal check telemetry"
+domains = [
+    "internalcheck.apple.com",
+]
+
+[[rules]]
+notes = "Apple IPS (unknown telemetry)"
+domains = [
+    "static.ips.apple.com",
+]
+
+[[rules]]
+notes = "Apple Tips daemon (tipsd) - promotional content delivery"
+domains = [
+    "ipcdn.apple.com",
+    "ipcdn.g.aaplimg.com",
+    "ipcdn-lb.apple.com.akadns.net",
+]
+
+[[rules]]
+notes = "Block Tips daemon from all network access"
+deny-process = "/usr/libexec/tipsd"
+
+[[rules]]
+notes = "Apple promoted content (promotedcontentd) - suggestions and recommendations"
+domains = [
+    "sas.pcms.apple.com",
+]
+
+[[rules]]
+notes = "Block promotedcontentd from all network access"
+deny-process = "/usr/libexec/promotedcontentd"
+
+[[rules]]
+notes = "Block App Store engagement daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/AppleMediaServicesUI.framework/amsengagementd"
+
+[[rules]]
+notes = "Block RTC (FaceTime) reporting daemon from all network access"
+deny-process = "/usr/libexec/rtcreportingd"
+
+[[rules]]
+notes = "Block iCloud Telemetry service from all network access"
+deny-process = "/System/Library/PrivateFrameworks/CloudTelemetry.framework/Versions/A/XPCServices/CloudTelemetryService.xpc/Contents/MacOS/CloudTelemetryService"
+
+[[rules]]
+notes = "Block Core Analytics daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/CoreAnalytics.framework/Support/analyticsd"
+
+[[rules]]
+notes = "Block OS Analytics helper from all network access"
+deny-process = "/System/Library/CoreServices/osanalyticshelper"
+
+[[rules]]
+notes = "Block Diagnostics agent from all network access"
+deny-process = "/System/Library/CoreServices/diagnostics_agent"
+
+[[rules]]
+notes = "Block Diagnostics push daemon from all network access"
+deny-process = "/usr/libexec/diagnosticspushd"
+
+[[rules]]
+notes = "Block Diagnostics extensions daemon from all network access"
+deny-process = "/usr/libexec/diagnosticextensionsd"
+
+[[rules]]
+notes = "Block Wireless Diagnostics daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Support/awdd"
+
+[[rules]]
+notes = "Block WiFi Analytics daemon from all network access"
+deny-process = "/usr/libexec/wifianalyticsd"
+
+[[rules]]
+notes = "Block WiFi Velocity daemon (speed tests/diagnostics) from all network access"
+deny-process = "/usr/libexec/wifivelocityd"
+
+[[rules]]
+notes = "Block MetricKit daemon from all network access"
+deny-process = "/usr/libexec/metrickitd"
+
+[[rules]]
+notes = "Block Symptoms daemon from all network access"
+deny-process = "/usr/libexec/symptomsd"
+
+[[rules]]
+notes = "Block Symptoms diagnostics daemon from all network access"
+deny-process = "/usr/libexec/symptomsd-diag"
+
+[[rules]]
+notes = "Block Software Transparency daemon from all network access"
+deny-process = "/usr/libexec/swtransparencyd"
+
+[[rules]]
+notes = "Block Crash Reporter from all network access"
+deny-process = "/System/Library/CoreServices/ReportCrash"
+
+[[rules]]
+notes = "Block Crash Reporter Support Helper from all network access"
+deny-process = "/System/Library/CoreServices/CrashReporterSupportHelper"
+
+[[rules]]
+notes = "Block Feedback daemon from all network access"
+deny-process = "/usr/libexec/feedbackd"
+
+[[rules]]
+notes = "Block Input Analytics daemon from all network access"
+deny-process = "/usr/libexec/inputanalyticsd"
+
+[[rules]]
+notes = "Block Audio Analytics daemon from all network access"
+deny-process = "/usr/libexec/audioanalyticsd"
+
+[[rules]]
+notes = "Block Trial daemon (A/B testing) from all network access"
+deny-process = "/usr/libexec/triald"
+
+[[rules]]
+notes = "Block System Trial daemon from all network access"
+deny-process = "/usr/libexec/triald_system"
+
+[[rules]]
+notes = "Block New Device Outreach agent from all network access"
+deny-process = "/System/Library/PrivateFrameworks/NewDeviceOutreach.framework/ndoagent"
+
+[[rules]]
+notes = "Block Apple Device ID daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/CoreADI.framework/adid"
+
+[[rules]]
+notes = "Block Content Linking daemon (Synapse) from all network access"
+deny-process = "/System/Library/PrivateFrameworks/Synapse.framework/Support/contentlinkingd"
+
+[[rules]]
+notes = "Block Context Store Agent from all network access"
+deny-process = "/System/Library/PrivateFrameworks/CoreDuetContext.framework/Resources/ContextStoreAgent"
+
+[[rules]]
+notes = "Block Context Store daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/CoreDuetContext.framework/Resources/contextstored"
+
+[[rules]]
+notes = "Block Core Duet daemon (usage prediction) from all network access"
+deny-process = "/usr/libexec/coreduetd"
+
+[[rules]]
+notes = "Block Duet Expert daemon from all network access"
+deny-process = "/usr/libexec/duetexpertd"
+
+[[rules]]
+notes = "Block Eligibility daemon (feature/region checks) from all network access"
+deny-process = "/usr/libexec/eligibilityd"
+
+[[rules]]
+notes = "Block Follow-up daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/CoreFollowUp.framework/Versions/A/Support/followupd"
+
+[[rules]]
+notes = "Block Intelligent Routing daemon from all network access"
+deny-process = "/usr/libexec/intelligentroutingd"
+
+[[rules]]
+notes = "Block OS Prediction daemon from all network access"
+deny-process = "/usr/libexec/ospredictiond"
+
+[[rules]]
+notes = "Block Performance/Power Telemetry service from all network access"
+deny-process = "/System/Library/PrivateFrameworks/PowerLog.framework/Versions/A/XPCServices/PerfPowerTelemetryClientRegistrationService.xpc/Contents/MacOS/PerfPowerTelemetryClientRegistrationService"
+
+[[rules]]
+notes = "Block Status Kit Agent from all network access"
+deny-process = "/System/Library/PrivateFrameworks/StatusKit.framework/StatusKitAgent"
+
+[[rules]]
+notes = "Block WiFi Cloud Assets service from all network access"
+deny-process = "/System/Library/PrivateFrameworks/WiFiPolicy.framework/XPCServices/WiFiCloudAssetsXPCService.xpc/Contents/MacOS/WiFiCloudAssetsXPCService"

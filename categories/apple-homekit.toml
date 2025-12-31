@@ -1,0 +1,43 @@
+name = "Apple HomeKit (Smart Home)"
+description = "Blocks Apple Home app and HomeKit smart home services"
+severity = "aggressive"
+
+impact = """
+- Apple Home app will not control devices remotely
+- HomeKit accessories cannot be added or configured
+- Home automations may not trigger
+- Remote access to home devices blocked
+- Home sharing with family members affected
+- Local control on same network may still work
+"""
+
+[[rules]]
+notes = "Apple Home and HomeKit services"
+domains = [
+    "home.apple.com",
+    "homekit.apple.com",
+    "hap.apple.com",
+    "hkgateway.apple.com",
+    "homeaccessory.apple.com",
+]
+
+[[rules]]
+notes = "HomeKit registration and setup"
+domains = [
+    "hkregister.apple.com",
+    "hksetup.apple.com",
+    "hme.apple.com",
+    "household.apple.com",
+]
+
+[[rules]]
+notes = "Block Home app from all network access"
+deny-process = "/System/Applications/Home.app/Contents/MacOS/Home"
+
+[[rules]]
+notes = "Block HomeKit daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/HomeKitDaemon.framework/Support/homed"
+
+[[rules]]
+notes = "Block Home Energy daemon from all network access"
+deny-process = "/System/iOSSupport/System/Library/PrivateFrameworks/HomeEnergyDaemon.framework/Support/homeenergyd"

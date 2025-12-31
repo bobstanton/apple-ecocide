@@ -1,0 +1,95 @@
+name = "Apple App Store"
+description = "Blocks Apple App Store for downloading and updating apps"
+severity = "aggressive"
+
+impact = """
+- Cannot download new apps from App Store
+- Cannot update existing apps
+- In-app purchases will not work
+- App Store app will show errors
+- TestFlight beta apps cannot be installed
+"""
+
+[[rules]]
+notes = "App Store main services"
+domains = [
+    "apps.apple.com",
+    "itunes.apple.com",
+    "mzstatic.com",
+]
+
+[[rules]]
+notes = "App Store purchases"
+domains = [
+    "buy.itunes.apple.com",
+    "su.itunes.apple.com",
+    "sp.itunes.apple.com",
+]
+
+[[rules]]
+notes = "App Store search and discovery"
+domains = [
+    "search.itunes.apple.com",
+    "amp-api.apps.apple.com",
+    "amp-api-edge.apps.apple.com",
+    "amp-api-search-edge.apps.apple.com",
+]
+
+[[rules]]
+notes = "App Store assets and content"
+domains = [
+    "s.mzstatic.com",
+]
+
+[[rules]]
+notes = "TestFlight beta distribution"
+domains = [
+    "testflight.apple.com",
+    "beta.apple.com",
+    "appstoreconnect.apple.com",
+]
+
+[[rules]]
+notes = "App Store Connect and developer"
+domains = [
+    "itunesconnect.apple.com",
+    "contentdelivery.itunes.apple.com",
+]
+
+[[rules]]
+notes = "Enterprise app validation"
+domains = [
+    "ppq.apple.com",
+]
+
+[[rules]]
+notes = "App attestation and validation"
+domains = [
+    "appattest.apple.com",
+]
+
+[[rules]]
+notes = "Alternative app marketplaces (EU)"
+domains = [
+    "apps-marketplace.apple.com",
+]
+
+[[rules]]
+notes = "Block App Store agent from all network access"
+deny-process = "/System/Library/PrivateFrameworks/AppStoreDaemon.framework/Support/appstoreagent"
+
+[[rules]]
+notes = "Block App Store account services daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/AppleMediaServices.framework/Resources/amsaccountsd"
+
+[[rules]]
+notes = "Block App Store on-device storage daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/OnDeviceStorage.framework/Support/amsondevicestoraged"
+
+[[rules]]
+notes = "Block StoreKit agent (in-app purchases) from all network access"
+deny-process = "/System/Library/Frameworks/StoreKit.framework/Support/storekitagent"
+
+[[rules]]
+notes = "Block Commerce daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Resources/commerce"

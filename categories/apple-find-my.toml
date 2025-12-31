@@ -1,0 +1,48 @@
+name = "Apple Find My"
+description = "Blocks Find My iPhone, Find My Friends, and Find My network"
+severity = "aggressive"
+
+impact = """
+- Find My iPhone/iPad/Mac will not work
+- You cannot locate lost devices
+- Find My Friends location sharing disabled
+- AirTag and Find My network tracking blocked
+- Family location sharing will not function
+"""
+
+[[rules]]
+notes = "Find My Friends and Find My iPhone"
+domains = [
+    "fmf.apple.com",
+    "fmfmobile.icloud.com",
+    "fmip.apple.com",
+    "fmipmobile.icloud.com",
+]
+
+[[rules]]
+notes = "Block Find My app from all network access"
+deny-process = "/System/Applications/FindMy.app/Contents/MacOS/FindMy"
+
+[[rules]]
+notes = "Block Find My location daemon from all network access"
+deny-process = "/usr/libexec/findmylocateagent"
+
+[[rules]]
+notes = "Block Find My Mac daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/FindMyMac.framework/Resources/FindMyMacd"
+
+[[rules]]
+notes = "Block Find My Device daemon from all network access"
+deny-process = "/usr/libexec/findmydeviced"
+
+[[rules]]
+notes = "Block Find My beaconing daemon from all network access"
+deny-process = "/usr/libexec/findmybeaconingd"
+
+[[rules]]
+notes = "Block Search Party daemon (Find My network) from all network access"
+deny-process = "/usr/libexec/searchpartyd"
+
+[[rules]]
+notes = "Block Search Party user agent from all network access"
+deny-process = "/usr/libexec/searchpartyuseragent"

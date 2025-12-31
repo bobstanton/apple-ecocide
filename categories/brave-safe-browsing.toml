@@ -1,0 +1,17 @@
+name = "Brave Safe Browsing"
+description = "Blocks Brave's Safe Browsing protection service"
+severity = "aggressive"
+
+impact = """
+- No warnings for malicious/phishing websites in Brave
+- Malware download protection disabled
+- Consider alternative security measures
+"""
+
+[[rules]]
+notes = "Brave Safe Browsing"
+domains = [
+    "safebrowsing.brave.com",
+    "safebrowsing2.brave.com",
+    "safebrowsing.bravesoftware.com",
+]

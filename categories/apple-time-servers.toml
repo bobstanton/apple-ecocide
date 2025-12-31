@@ -1,0 +1,20 @@
+name = "Apple Time Servers"
+description = "Blocks Apple's NTP time synchronization servers"
+severity = "aggressive"
+
+impact = """
+- System clock will not sync with Apple's time servers
+- Configure an alternative NTP server (e.g., pool.ntp.org)
+- Time-sensitive operations may fail if clock drifts
+- Certificate validation may fail if time is significantly off
+"""
+
+[[rules]]
+notes = "Apple NTP time servers"
+domains = [
+    "time.apple.com",
+    "time-ios.apple.com",
+    "time-ios.g.aaplimg.com",
+    "time-macos.apple.com",
+    "time-osx.g.aaplimg.com",
+]

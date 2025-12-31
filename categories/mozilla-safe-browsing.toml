@@ -1,0 +1,18 @@
+name = "Mozilla Safe Browsing"
+description = "Blocks Mozilla's Safe Browsing and Tracking Protection services"
+severity = "aggressive"
+
+impact = """
+- No warnings for malicious/phishing websites in Firefox
+- Firefox Tracking Protection lists not updated
+- Consider alternative security measures
+"""
+
+[[rules]]
+notes = "Mozilla Safe Browsing and Tracking Protection"
+domains = [
+    "shavar.services.mozilla.com",
+    "shavar.prod.mozaws.net",
+    "tracking-protection.cdn.mozilla.net",
+    "tracking.services.mozilla.com",
+]

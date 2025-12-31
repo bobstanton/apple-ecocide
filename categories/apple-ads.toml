@@ -1,0 +1,28 @@
+name = "Apple Advertising"
+description = "Blocks Apple's advertising SDK and ad tracking"
+severity = "minimal"
+
+impact = """
+- Apple Search Ads tracking disabled
+- Personalized ads in Apple apps blocked
+- Ad attribution tracking blocked
+- App Store ad personalization disabled
+"""
+
+[[rules]]
+notes = "Apple advertising SDK and tracking"
+domains = [
+    "iadsdk.apple.com",
+    "iadsdk.apple.com.edgekey.net",
+    "cf.iadsdk.apple.com",
+    "tr.iadsdk.apple.com",
+    "ut.iadsdk.apple.com",
+    "news.iadsdk.apple.com",
+    "news.iadsdk.v.aaplimg.com",
+    "news.iadsdk.apple.com.akadns.net",
+    "news.iadsdk-lb.apple.com.akadns.net",
+]
+
+[[rules]]
+notes = "Block Ad Privacy daemon from all network access"
+deny-process = "/usr/libexec/adprivacyd"

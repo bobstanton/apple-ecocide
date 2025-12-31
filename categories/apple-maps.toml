@@ -1,0 +1,30 @@
+name = "Apple Maps"
+description = "Blocks Apple Maps app and MapKit services"
+severity = "aggressive"
+
+impact = """
+- Apple Maps app will not load map tiles
+- Turn-by-turn navigation will not work
+- Maps in other apps using MapKit affected
+- Flyover and 3D views unavailable
+"""
+
+[[rules]]
+notes = "Apple Maps tile and data servers"
+domains = [
+    "apple-mapkit.com",
+]
+
+[[rules]]
+notes = "Apple Maps telemetry"
+domains = [
+    "world-gen.g.aaplimg.com",
+]
+
+[[rules]]
+notes = "Block Maps app from all network access"
+deny-process = "/System/Applications/Maps.app/Contents/MacOS/Maps"
+
+[[rules]]
+notes = "Block Maps push daemon from all network access"
+deny-process = "/System/Library/CoreServices/mapspushd"

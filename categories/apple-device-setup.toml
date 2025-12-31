@@ -1,0 +1,61 @@
+name = "Apple Device Setup & Activation"
+description = "Blocks Apple device activation, setup, and provisioning servers"
+severity = "aggressive"
+
+impact = """
+- New device activation may fail
+- Device setup assistant may not complete
+- Restoring from backup may have issues
+- MDM enrollment will not work
+- Do not enable on new devices until fully set up
+"""
+
+[[rules]]
+notes = "Apple activation/provisioning"
+domains = [
+    "albert.apple.com",
+    "albert.gcsis-apple.com.akadns.net",
+]
+
+[[rules]]
+notes = "Apple device activation and setup"
+domains = [
+    "gs.apple.com",
+    "gs.apple.com.akadns.net",
+    "gsas.apple.com",
+    "gsas.apple.com.akadns.net",
+    "gsa.apple.com",
+    "gsa.apple.com.akadns.net",
+    "gs-loc.apple.com",
+    "gsra.apple.com",
+    "humb.apple.com",
+    "sq-device.apple.com",
+]
+
+[[rules]]
+notes = "Apple remote configuration"
+domains = [
+    "configuration.apple.com",
+    "configuration.apple.com.akadns.net",
+    "configuration.apple.com.edgekey.net",
+    "configuration.v.aaplimg.com",
+    "configuration-row-lb.apple.com.akadns.net",
+    "device-config.pcms.apple.com",
+    "device-config.v.aaplimg.com",
+]
+
+[[rules]]
+notes = "Content caching and CDN locator"
+domains = [
+    "lcdn-registration.apple.com",
+    "serverstatus.apple.com",
+    "lcdn-locator.apple.com",
+    "lcdn-locator-usuqo.apple.com.akadns.net",
+]
+
+[[rules]]
+notes = "Carrier updates"
+domains = [
+    "itunes.com",
+    "appldnld.apple.com.edgesuite.net",
+]

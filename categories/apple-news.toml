@@ -1,0 +1,35 @@
+name = "Apple News"
+description = "Blocks Apple News app and services"
+severity = "recommended"
+
+impact = """
+- Apple News app will not load content
+- News widgets will not display stories
+- Apple News+ subscription content inaccessible
+- News notifications will not work
+"""
+
+[[rules]]
+notes = "Apple News services"
+domains = [
+    "news.apple.com",
+    "news-events.apple.com",
+    "news-edge.apple.com",
+    "news-client.apple.com",
+    "news-api.apple.com",
+    "apple.news",
+]
+
+[[rules]]
+notes = "Apple News analytics"
+domains = [
+    "news-events.news.apple-dns.net",
+]
+
+[[rules]]
+notes = "Block News app from all network access"
+deny-process = "/System/Applications/News.app/Contents/MacOS/News"
+
+[[rules]]
+notes = "Block News daemon from all network access"
+deny-process = "/System/Library/PrivateFrameworks/NewsDaemon.framework/newsd"

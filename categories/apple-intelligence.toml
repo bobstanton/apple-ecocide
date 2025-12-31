@@ -1,0 +1,48 @@
+name = "Apple Intelligence (AI)"
+description = "Blocks Apple Intelligence, Private Cloud Compute, and AI/ML services"
+severity = "recommended"
+
+impact = """
+- Apple Intelligence features will not work
+- Writing Tools (rewrite, proofread, summarize) disabled
+- Image generation features blocked
+- Private Cloud Compute AI processing blocked
+- Proactive suggestions and predictions disabled
+"""
+
+[[rules]]
+notes = "Apple Intelligence Private Cloud Compute (PCC)"
+domains = [
+    "apple-pcc.com",
+    "pcc.apple.com",
+    "private-cloud-compute.apple.com",
+    "privatecloud.apple.com",
+    "privatecomputecloud.apple.com",
+]
+
+[[rules]]
+notes = "Apple Machine Learning and AI services"
+domains = [
+    "ml.apple.com",
+    "machinelearning.apple.com",
+    "coreml.apple.com",
+    "ai.apple.com",
+    "intelligence.apple.com",
+    "apple-intelligence.apple.com",
+]
+
+[[rules]]
+notes = "Apple Knowledge and Proactive Intelligence"
+domains = [
+    "knowledge.apple.com",
+    "proactive.apple.com",
+    "parsec.apple.com",
+]
+
+[[rules]]
+notes = "Block Generative Experiences daemon (Apple Intelligence) from all network access"
+deny-process = "/System/Library/PrivateFrameworks/GenerativeExperiencesRuntime.framework/Versions/A/generativeexperiencesd"
+
+[[rules]]
+notes = "Block Intelligence Platform Compute service from all network access"
+deny-process = "/System/Library/PrivateFrameworks/IntelligencePlatformCompute.framework/Versions/A/XPCServices/IntelligencePlatformComputeService.xpc/Contents/MacOS/IntelligencePlatformComputeService"

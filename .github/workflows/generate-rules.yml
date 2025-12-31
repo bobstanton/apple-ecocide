@@ -1,0 +1,102 @@
+# Example workflow for generating and hosting apple-ecocide rules via GitHub Pages
+#
+# To use in another repository:
+# 1. Copy this file to .github/workflows/generate-rules.yml
+# 2. Customize RULE_ARGS below
+# 3. Enable GitHub Pages: Settings > Pages > Source: GitHub Actions
+# 4. Push to trigger the workflow
+#
+# The rules file will be available at: https://<username>.github.io/<repo>/apple-ecocide.lsrules
+
+name: Generate Rules
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Rebuild daily to pick up upstream category updates
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+env:
+  # Customize rule generation arguments here
+  RULE_ARGS: "-s aggressive --mode allow --include apple-appstore apple-software-updates"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: rules
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.check.outputs.changed }}
+    steps:
+      - name: Checkout apple-ecocide
+        uses: actions/checkout@v4
+        with:
+          repository: bobstanton/apple-ecocide
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache cargo
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Build and generate rules
+        run: |
+          cargo build --release
+          mkdir -p output
+          ./target/release/apple-ecocide ${{ env.RULE_ARGS }} --output output/apple-ecocide.lsrules
+
+      - name: Check for changes
+        id: check
+        run: |
+          NEW_HASH=$(sha256sum output/apple-ecocide.lsrules | cut -d' ' -f1)
+          PAGES_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/apple-ecocide.lsrules"
+          if OLD_CONTENT=$(curl -sf "$PAGES_URL"); then
+            OLD_HASH=$(echo "$OLD_CONTENT" | sha256sum | cut -d' ' -f1)
+          else
+            OLD_HASH="none"
+          fi
+          if [ "$NEW_HASH" = "$OLD_HASH" ]; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No changes detected"
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Changes detected"
+          fi
+
+      - name: Setup Pages
+        if: steps.check.outputs.changed == 'true'
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        if: steps.check.outputs.changed == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: output
+
+  deploy:
+    # Disabled in the main repo to avoid conflicting with pages.yml
+    if: github.repository != 'bobstanton/apple-ecocide' && needs.build.outputs.changed == 'true'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}apple-ecocide.lsrules
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
